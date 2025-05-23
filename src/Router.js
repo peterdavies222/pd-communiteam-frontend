@@ -22,7 +22,7 @@ import messagesView from './views/pages/messages'
 
 // define routes
 const routes = {
-	'/signin': signinView,
+	'/': signinView,
 	'/signup': signupView,
 	'/onboarding': onboardingView,
 

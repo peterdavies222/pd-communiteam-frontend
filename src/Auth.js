@@ -30,7 +30,7 @@ class Auth {
     /// sign up success - show toast and redirect to sign in page
     Toast.show('Account created, please sign in')        
     // redirect to signin
-    gotoRoute('/signin')
+    gotoRoute('/')
   }
 
 
@@ -75,7 +75,7 @@ class Auth {
       // no local token!
       Toast.show("Please sign in")    
       // redirect to sign in page      
-      gotoRoute('/signin')
+      gotoRoute('/')
       return
     }
     
@@ -96,7 +96,7 @@ class Auth {
       localStorage.removeItem('accessToken')
       Toast.show("session expired, please sign in")
       // redirect to sign in      
-      gotoRoute('/signin')
+      gotoRoute('/')
       return
     }
     
@@ -114,7 +114,7 @@ class Auth {
     // delete local token
     localStorage.removeItem('accessToken')       
     // redirect to sign in    
-    gotoRoute('/signin')
+    gotoRoute('/')
     // unset currentUser
     this.currentUser = null
   }
