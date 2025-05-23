@@ -1,0 +1,126 @@
+.explore {
+
+    height: 60vh;
+  
+    .explore__content {
+      width: 100%;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+  
+      .explore__search {
+        sl-input {
+          margin-bottom: 15px;
+        }
+  
+        .explore__buttons {
+          display: flex;
+          justify-content: space-between;
+  
+          .explore__quick-filters {
+            display: flex;
+            gap: 15px;
+            position: relative;
+          }
+        }
+      }
+  
+      .explore__events {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        overflow: scroll;
+        overscroll-behavior: contain;
+        position: relative;
+        mask-image: linear-gradient( /* gradients in explore from teegan */
+				to bottom,
+				rgba(black, 0) 0%,
+				black calc(30rem / 16),
+				black calc(100% - #{calc(30rem / 16)}),
+				rgba(black, 0) 100%
+			);
+      }
+    }
+    
+    .explore__map {
+      width: 100%;
+      flex-shrink: 1;
+      height: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+  
+}
+  
+  .filters-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+
+    display: none;
+  }
+  
+  .filters-backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
+    backdrop-filter: blur(15px);
+
+    display: none;
+  }
+  
+  .filters-modal {
+    position: fixed;
+    width: 760px;
+    left: calc((100vw - 760px) / 2);
+    background-color: var(--ct-lightyellow);
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    top: 150px;
+    padding: 30px 30px 0;
+    border-radius: 30px;
+
+    display: none;
+    top: 100vh;
+  
+    .title {
+      margin-bottom: 60px;
+    }
+  
+    .filters__title-buttons {
+      display: flex;
+      gap: 15px;
+
+      button {
+        
+        box-sizing: border-box;
+        align-self: stretch;
+      }
+    }
+  }
+  
+  .modal__options-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-bottom: 30px;
+  }
+  
+  .modal__content-frame {
+    margin-bottom: 30px;
+  }
+  
+  sl-select::part(form-control-label), sl-radio-group::part(form-control-label) {
+    font-size: calc(24rem / 16);
+    font-family: 'sofia-bold';
+    color: var(--ct-black);
+    margin-bottom: 10px;
+  }

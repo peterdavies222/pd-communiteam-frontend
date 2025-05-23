@@ -1,0 +1,49 @@
+.profile {
+
+    .content-frame:not(:last-of-type) {
+        padding-bottom: 60px;
+        border-bottom: solid var(--ct-midgrey) 1px;
+        margin-bottom: 60px;
+    }
+    
+    .profile__item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        &:not(:last-of-type) {
+            margin-bottom: 30px;
+        }
+    
+        &__heading {
+            font-family: 'sofia-bold';
+            color: var(--ct-midgrey);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        &__text {
+            margin: 0;
+            color: var(--ct-black);
+            font-size: 1rem;
+        }
+
+        sl-avatar {
+            --size: 140px;
+            border: solid var(--ct-midgrey) 1px;
+            border-radius: 50%;
+            width: fit-content;
+            margin: 0;
+        }
+    }
+
+    .delete-account-button {
+        color: var(--ct-black);
+        background-color: var(--ct-red);
+        text-decoration: none;
+        font-family: 'sofia-medium';
+        padding: 5px 15px;
+        border-radius: 5px;
+    }
+
+}

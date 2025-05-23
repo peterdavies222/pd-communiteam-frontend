@@ -1,0 +1,59 @@
+// Vars
+
+:root {
+  // base
+  --base-txt-color: var(--ct-black);
+  --heading-color: var(--ct-black);
+  --base-font-family: 'sofia-regular', sans-serif;
+  --titles-font-family: 'veneer-regular';
+  --body-bg: var(--ct-lightyellow);
+  
+  
+
+  // colors  
+  $brand-color: #16C47E;
+  --brand-color: #{$brand-color};
+  --link-color: var(--ct-green);
+  
+  // app header
+  --app-header-height: 60px;
+  --app-header-txt-color: #fff;
+  --app-header-title-font-size: 1.6em;
+
+  // my colours
+  --ct-green: #16C47E;
+  --ct-tintedgreen: #25d38d;
+  --ct-lightgreen: #ACF4D7;
+  --ct-yellow: #FFD659;
+  --ct-lightyellow: #FFFBF1;
+  --ct-midyellow: #fff6da;
+  --ct-orange: #FF9C24;
+  --ct-red: #FA3928;
+  --ct-lightyellow-transparent: #FFFBF100;
+  --ct-black: #171717;
+  --ct-darkgrey: #3B3B3B;
+  --ct-darkgrey-translucent: #3B3B3B15;
+  --ct-midgrey: #969696;
+  --ct-lightgrey: #E9E9E9;
+
+  // my values
+  --ct-margins: 60px;
+  @media screen and (max-width: 500px) {
+    --ct-margins: 30px;
+  }
+
+  // shoelace tokens
+  // full list here:
+  // https://github.com/shoelace-style/shoelace/blob/current/src/styles/base.scss
+  --sl-color-primary-50: #f4f4f4;
+  --sl-color-primary-100: #{lighten($brand-color, 40%)};
+  --sl-color-primary-200: #{lighten($brand-color, 30%)};
+  --sl-color-primary-300: #{lighten($brand-color, 20%)};
+  --sl-color-primary-400: #{lighten($brand-color, 10%)};
+  --sl-color-primary-500: #{$brand-color};
+  --sl-color-primary-600: #{darken($brand-color, 10%)};
+  --sl-color-primary-700: #{darken($brand-color, 20%)};
+  --sl-color-primary-800: #{darken($brand-color, 30%)};
+  --sl-color-primary-900: #{darken($brand-color, 40%)};
+  --sl-focus-ring-color-primary: #{rgba($brand-color, 0.1)};
+}

@@ -1,0 +1,17 @@
+ct-message[status=unread]:not(:last-of-type) {
+    margin-bottom: 30px;
+}
+
+ct-message[status=read]:not(:last-of-type) {
+    padding-bottom: 20px;
+    border-bottom: solid var(--ct-midgrey) 1px;
+    margin-bottom: 20px;
+}
+
+.main-content.messages {
+    min-height: 50vh;
+}
+
+ct-message {
+    display: block;
+}

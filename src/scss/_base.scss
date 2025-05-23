@@ -1,0 +1,271 @@
+// Base
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+
+}
+
+body {
+  padding: 0;  
+  margin: 0;
+  color: var(--base-txt-color);
+  font-family: var(--base-font-family);
+  font-weight: 300;
+  background: var(--body-bg);
+  height: 100vh;
+}
+
+
+// headings ------------
+h1,h2,h3,h5,h6 {
+  margin: 0;
+  color: var(--ct-black);
+  font-family: 'veneer';
+  font-weight: 100;
+}
+
+h3 {
+  font-family: 'sofia-bold';
+  font-size: calc(24rem / 16);
+}
+
+h2 {
+  font-size: calc(36rem / 16);
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  h2 {
+    //letter-spacing: 1px; // experimenting
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+}
+
+.title--close {
+  justify-content: unset;
+  gap: 30px;
+}
+
+
+// links ---------------
+a {
+  color: var(--link-color);
+  font-family: 'sofia-medium';
+}
+
+// buttons -----------------
+
+.button {
+  color: var(--ct-darkgrey);
+  font-size: calc(14rem / 16);
+  padding: 5px 15px;
+  border-radius: 100px;
+  font-family: 'sofia-medium';
+  align-self: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.scroll-button {
+  border: solid var(--ct-tintedgreen) 2px;
+  width: 40px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ct-green);
+  font-size: 1rem;
+
+  &:hover {
+    background-color: var(--ct-lightgreen);
+  }
+}
+
+.button--solid {
+  background-color: var(--ct-green);
+  border: none;
+
+  &:hover {
+    background-color: var(--ct-tintedgreen);
+  }
+}
+
+.button--outline {
+  border: solid var(--ct-green) 2px;
+  background-color: transparent;
+
+  &:hover {
+    background-color: var(--ct-tintedgreen);
+    border: solid var(--ct-tintedgreen) 2px;
+  }
+}
+
+.button--large {
+  font-size: 1rem;
+  padding: 5px 15px;
+}
+
+
+// chips
+.chips {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+// app splash screen -------
+.app-splash {
+  position: fixed;
+  background: #fff;
+  color: #777;
+  display: flex;
+  left: 0;
+  top:0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  .app-logo {
+    width: 180px;
+    display: block;
+    margin-bottom: 1em;
+  }
+}
+
+
+// helper classes ---------
+// .calign {
+//   text-align: center;
+// }
+
+// .large-text {
+//   font-size: 1.6em;
+// }
+
+// .brand-color {
+//   color: var(--brand-color);
+// }
+
+// generic-entry ------------
+.generic-entry {
+  box-shadow: 0px 3px 5px rgba(0,0,0,0.07);
+  border-radius: 5px;
+  margin-bottom: .5em;
+  padding: 1em;
+  background: #fff;
+}
+
+// root ---------------
+#root {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;  
+  //overflow: hidden;
+}
+
+// page --------------------
+// .page-content {
+//   position: absolute;
+//   margin: 0;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   //overflow-y: scroll;
+//   padding: 0;
+// }
+
+.main-content {
+  margin-inline: var(--ct-margins, 60px);
+  display: flex;
+  flex-direction: column;
+  //overflow-x: scroll;
+}
+
+.main-content.horizontal {
+  flex-direction: row;
+  gap: 30px;
+}
+
+// .page-centered {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// sign in + sign up pages ----------
+// .signinup-box,
+// .signup-box {  
+//   max-width: 320px;
+//   text-align: center;
+// }
+
+// .signinup-logo {
+//   width: 200px;
+//   margin-bottom: 1em;
+// }
+
+// guide page ---------------
+// .guide-step {
+//   padding: 1em;
+//   margin: 1.5em auto;
+//   max-width: 600px;
+//   img {
+//     width: 100%;
+//     height: auto;
+//   }
+// }
+
+// Global things -------------------------
+
+.content-frame:has(.carousel):not(:last-of-type), .content-frame:has(.events-grid):not(:last-of-type) {
+  padding-bottom: 60px;
+  border-bottom: solid var(--ct-midgrey) 1px;
+  margin-bottom: 60px;
+}
+
+.content-frame:not(:last-of-type) {
+  margin-bottom: 60px;
+}
+
+.carousel {
+  display: flex;
+  gap: 30px;
+  overflow: auto;
+  width: 100vw;
+  margin-left: calc(-1 * var(--ct-margins));
+  padding-inline: var(--ct-margins);
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    visibility: hidden;
+  }
+}
+
+// RESPONSIVE - MOBILE -------------------
+// @media all and (max-width: 768px){ 
+
+//   .signinup-box {
+//     width: 90%;
+//     max-width: none;
+//   }
+// }

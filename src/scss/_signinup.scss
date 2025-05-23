@@ -1,0 +1,103 @@
+.signinup {
+
+    display: flex;
+    gap: 0;
+
+    // left side
+
+    &__left {
+        width: calc(50vw - 100px);
+        height: 100vh;
+        padding: 30px 60px;
+        flex-shrink: 0;
+    }
+
+    &__title {
+        width: 100%;
+        margin-bottom: 160px;
+    }
+
+    &__logo {
+        width: 270px;
+    }
+
+    &__tagline {
+        text-transform: uppercase;
+        font-family: 'sofia-medium';
+        font-style: italic;
+        margin-top: 6px;
+        font-size: 14px;
+    }
+
+    &__form {
+        width: clamp(50%, 375px, 100%);
+
+        h1 {
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-size: calc(36rem / 16);
+        }
+
+        .input-group:not(:last-of-type) {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-family: 'sofia-bold';
+            color: var(--ct-black);
+        }
+
+        sl-input {
+            &::part(base) {
+                background-color: transparent;
+                border: solid var(--ct-midgrey) 1px;
+                font-family: 'sofia-regular';
+            }
+        }
+
+        sl-button {
+
+            margin-top: 30px;
+
+            &::part(base) {
+                background-color: var(--ct-green);
+                color: var(--ct-black);
+                font-family: 'sofia-medium';
+                border: none;
+                font-size: calc(20rem / 16);
+
+                &:hover {
+                    background-color: var(--ct-tintedgreen);
+                }
+            }
+        }
+        
+        p {
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+    }
+
+    // right side
+    &__right {
+        width: calc(50vw + 100px);
+        height: 100vh;
+        flex-shrink: 0;
+        clip-path: polygon(200px 0, 100% 0, 100% 100%, 0px 100%);
+        //overflow: hidden;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 20% 50%;
+    }
+
+}
+
+#root:has(main.signinup) {
+    overflow: hidden;
+}

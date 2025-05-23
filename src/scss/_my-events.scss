@@ -1,0 +1,12 @@
+.events-grid {
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 60px;
+    ct-event {
+        flex-grow: 0;
+        width: 300px;
+    }
+}

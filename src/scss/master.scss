@@ -1,0 +1,58 @@
+// @import './../../static/fonts/fontawesome/scss/icons';
+// @import './../../static/fonts/fontawesome/scss/icons';
+
+@use "fontawesome/fontawesome";
+@use "fontawesome/solid";
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,300;0,500;1,100;1,200;1,500&display=swap');
+@import 'vars';
+@import 'base';
+@import 'forms';
+@import 'shoelace';
+@import 'toast';
+@import 'explore';
+@import 'my-events';
+@import 'messages';
+@import 'profile';
+@import 'signinup';
+@import 'onboarding';
+
+@font-face {
+    font-family: 'sofia-regular';
+    src: url('./../../static/fonts/sofia-regular.otf');
+}
+
+@font-face {
+    font-family: 'sofia-italic';
+    src: url('./../../static/fonts/sofia-regular-italic.otf');
+}
+
+@font-face {
+    font-family: 'sofia-bold';
+    src: url('./../../static/fonts/sofia-bold.otf');
+}
+
+@font-face {
+    font-family: 'sofia-bold-italic';
+    src: url('./../../static/fonts/sofia-bold-italic.otf');
+}
+
+@font-face {
+    font-family: 'sofia-medium';
+    src: url('./../../static/fonts/sofia-medium.otf');
+}
+
+@font-face {
+    font-family: 'sofia-medium-italic';
+    src: url('./../../static/fonts/sofia-medium-italic.otf');
+}
+
+@font-face {
+    font-family: 'veneer-regular';
+    src: url('./../../static/fonts/veneer-test.otf');
+}
+
+@font-face {
+    font-family: 'veneer-italic';
+    src: url('./../../static/fonts/veneer-italic-test.otf');
+}
