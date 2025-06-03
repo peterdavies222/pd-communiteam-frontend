@@ -65,7 +65,8 @@ class AttendingView {
               name="${event.name}"
               description="${event.description}"
               location="${event.location}"
-              url="/event?id=${event._id}"></ct-event>
+              url="/event?id=${event._id}"
+              id="${event._id}"></ct-event>
               `)}
           </div>
 

@@ -65,6 +65,7 @@ class SavedView {
               description="${event.description}"
               .images="${event.images}"
               url="/event?id=${event._id}"
+              id="${event._id}"
               type="grid"
             ></ct-event>
               `)}

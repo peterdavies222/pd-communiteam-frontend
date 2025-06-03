@@ -134,6 +134,7 @@ class DashboardView {
                   description="${event.description}"
                   .images="${event.images}"
                   url="/event?id=${event._id}"
+                  id="${event._id}"
                 ></ct-event>
               `)}
           </div>`
@@ -170,6 +171,7 @@ class DashboardView {
                   description="${event.description}"
                   .images="${event.images}"
                   url="/event?id=${event._id}"
+                  id="${event._id}"
                 ></ct-event>
               `)}
           </div>`
