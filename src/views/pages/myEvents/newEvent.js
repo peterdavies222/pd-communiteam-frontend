@@ -31,6 +31,7 @@ class newEventView {
       Toast.show(err, 'error')
       submitBtn.removeAttribute('loading')
     }
+
   }
 
   render(){
