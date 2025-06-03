@@ -38,7 +38,7 @@ class AttendingView {
         ></ct-nav>
         <ct-heroimage
         title="Attending"
-        image="../images/events-hero.jpeg"
+        image="../images/events-hero.jpg"
         ></ct-heroimage>
 
       </header>

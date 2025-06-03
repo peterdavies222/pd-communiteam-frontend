@@ -63,7 +63,7 @@ class newEventView {
         messagecount="2"
         user=${JSON.stringify(Auth.currentUser)}>
         </ct-nav>
-        <ct-heroimage title="Post new event"></ct-heroimage>
+        <ct-heroimage title="Post new event" image="../images/events-hero.jpg"></ct-heroimage>
       </header>
       <main class="main-content new-event">
 

@@ -53,7 +53,7 @@ class PostedView {
         </ct-nav>
         <ct-heroimage
         title="My Posted Events"
-        image="../images/events-hero.jpeg"
+        image="../images/events-hero.jpg"
         ></ct-heroimage>
       </header>
       <main class="main-content">

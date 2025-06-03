@@ -141,7 +141,7 @@ class DashboardView {
         <div class="content-frame">
           <div class="title">
             <h2>Your saved events</h2>
-            <div class="title__buttons" id="saved__buttons">
+            <div class="title__buttons" id="saved__buttons" style="display: none;">
               <button class="scroll-button" id="saved__left"><i class="fa-solid fa-chevron-left"></i></button>
               <button class="scroll-button" id="saved__right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>

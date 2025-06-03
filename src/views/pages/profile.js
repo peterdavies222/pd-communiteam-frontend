@@ -127,7 +127,7 @@ class ProfileView {
       ></ct-nav>
       <ct-heroimage
         title="Profile"
-        image="../images/profile-hero.jpeg"
+        image="../images/profile-hero.jpg"
       ></ct-heroimage>
     </header>
 
