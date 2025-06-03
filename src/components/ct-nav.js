@@ -2,7 +2,11 @@ import { LitElement, html } from 'lit'
 import {anchorRoute, gotoRoute} from '../Router'
 import Auth from '../Auth'
 import App from '../App'
+import Utils from '../Utils'
 import profile from '../views/pages/profile'
+import explore from '../views/pages/explore'
+import drafts from '../views/pages/myEvents/drafts'
+import saved from '../views/pages/myEvents/saved'
 
 // SVGs
 
@@ -16,9 +20,10 @@ const exploreIcon = html`<svg width="19" height="20" viewBox="0 0 19 20" fill="n
 </svg>
 `
 
-const myEventsIcon = html`<svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.70173 1.79954C9.23071 -0.849111 15.0501 0.674953 17.6988 5.20383C20.3475 9.73289 18.8226 15.5522 14.2935 18.2009C9.76453 20.8493 3.94606 19.3246 1.29744 14.7956C-1.35096 10.2667 0.173011 4.44826 4.70173 1.79954ZM3.58748 14.614C5.12332 16.5866 7.50835 17.6173 9.90779 17.488C9.82972 17.4347 9.75081 17.3803 9.67341 17.3239C8.38561 16.3864 7.07979 14.9636 5.95076 13.2322L3.58748 14.614ZM7.67927 12.2214C8.68839 13.751 9.81434 14.9531 10.8511 15.7077C11.463 16.1531 12.0042 16.4141 12.439 16.5202C12.8671 16.6247 13.1261 16.5664 13.2838 16.4743L13.2857 16.4734C13.443 16.3808 13.6203 16.1838 13.7388 15.7605C13.8596 15.3293 13.8974 14.7293 13.8092 13.9773C13.6597 12.7037 13.1631 11.134 12.3248 9.50461L7.67927 12.2214ZM14.0543 8.49387C15.0097 10.3268 15.6099 12.1628 15.7955 13.7448C15.8066 13.8396 15.8156 13.9341 15.8238 14.0281C17.1126 12.0004 17.3835 9.41649 16.4176 7.11106L14.0543 8.49387ZM3.17146 5.97141C1.88275 7.99883 1.61217 10.5831 2.57771 12.8884L4.94099 11.5066C3.98566 9.67368 3.38633 7.83755 3.20076 6.25559C3.1896 6.16044 3.17969 6.06569 3.17146 5.97141ZM6.55623 3.4802C6.128 3.37579 5.86906 3.43395 5.7115 3.5261C5.55396 3.61834 5.37629 3.81553 5.2574 4.23997C5.13667 4.67109 5.09888 5.27124 5.18709 6.02317C5.33652 7.2965 5.83253 8.86592 6.67048 10.4948L11.316 7.77805C10.307 6.24892 9.1817 5.04724 8.14509 4.2927C7.53297 3.84716 6.99116 3.58632 6.55623 3.4802ZM15.4078 5.3845C13.872 3.41293 11.4872 2.38223 9.08845 2.51145C9.16648 2.56478 9.2445 2.61921 9.32185 2.67551C10.6096 3.61285 11.9155 5.03609 13.0445 6.76731L15.4078 5.3845Z" fill="currentColor"/>
-</svg>`
+const myEventsIcon = html`<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.5 0C14.7467 0 19 4.25329 19 9.5C19 10.3647 18.8844 11.2029 18.668 11.999L18.5596 12.3691C17.3592 16.1628 13.8413 18.9266 9.66797 18.999L9.5 19C4.2533 19 0 14.7467 0 9.5C0 8.74332 0.0886968 8.00735 0.255859 7.30176L0.332031 7.00195C1.38113 3.14336 4.80107 0.260689 8.93066 0.0166016L9.33203 0.00195312C9.38791 0.00098431 9.44389 0 9.5 0ZM9.0127 2.01562C5.89542 2.21543 3.29125 4.32156 2.36328 7.18359C6.71773 8.04963 10 11.8911 10 16.5C10 16.6621 9.99338 16.8232 9.98535 16.9834C13.1035 16.7843 15.7066 14.6781 16.6348 11.8154C12.2813 10.9486 9 7.10819 9 2.5C9 2.33755 9.00462 2.17607 9.0127 2.01562ZM2.00781 9.16895C2.00308 9.27864 2 9.38898 2 9.5C2 13.0749 4.50171 16.0634 7.84961 16.8154C7.89678 16.826 7.94371 16.838 7.99121 16.8477C7.99644 16.7325 8 16.6166 8 16.5C8 12.8743 5.4273 9.84927 2.00781 9.15137C2.00755 9.15721 2.00806 9.1631 2.00781 9.16895ZM11 2.5C11 6.12456 13.5714 9.14755 16.9893 9.84668C16.9945 9.73182 17 9.61633 17 9.5C17 5.87398 14.4268 2.84891 11.0068 2.15137C11.0016 2.26682 11 2.38308 11 2.5Z" fill="currentColor"/>
+</svg>
+`
 
 const messagesIcon = html`<svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.9976 10C16.9976 5.85778 13.6401 2.5 9.49854 2.5C5.35701 2.50009 1.99951 5.85783 1.99951 10C1.99951 14.1422 5.35701 17.4999 9.49854 17.5C10.8337 17.5 12.0845 17.1516 13.1685 16.542L13.2534 16.5C13.4561 16.4101 13.684 16.3893 13.9009 16.4434L16.7983 17.168L16.2856 13.5752C16.2592 13.3899 16.2852 13.2005 16.3608 13.0293C16.7698 12.1042 16.9976 11.08 16.9976 10ZM18.9976 10C18.9976 11.2578 18.7498 12.4594 18.3042 13.5605L18.9897 18.3574C19.0368 18.687 18.9167 19.0192 18.6694 19.2422C18.453 19.4373 18.1637 19.527 17.8784 19.4922L17.7573 19.4697L13.7876 18.4766C12.4981 19.1303 11.0404 19.5 9.49854 19.5C4.25226 19.4999 -0.000488281 15.2466 -0.000488281 10C-0.000488281 4.75344 4.25226 0.500092 9.49854 0.5C14.7449 0.5 18.9976 4.75338 18.9976 10Z" fill="currentColor"/>
@@ -60,6 +65,12 @@ const profileIconSml = html`<svg width="17" height="17" viewBox="0 0 14 14" fill
 </svg>
 `
 
+const hamburgerIcon = html`<svg width="17" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>`
+
+const rightChevronIcon = html`<svg width="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>`
+
+const leftChevronIcon = html`<svg width="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>`
+
 customElements.define('ct-nav', class Communiteam extends LitElement {
   constructor(){
     super()    
@@ -86,17 +97,106 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
   testHandler(){
     alert("test")
   }
+
+  hamburgerToggle() {
+    let hamburgerIcon = this.renderRoot.querySelector('.nav__hamburger')
+    let options = this.renderRoot.querySelector('.nav--mobile--lower')
+    let isExpanded = hamburgerIcon.getAttribute('aria-expanded') === 'true'
+
+    function open() {
+      hamburgerIcon.setAttribute('aria-expanded', 'true')
+      options.setAttribute('data-expanded', 'true')
+    }
+    function close() {
+      hamburgerIcon.setAttribute('aria-expanded', 'false')
+      options.setAttribute('data-expanded', 'false')
+    }
+
+    isExpanded ? close() : open()
+  }
+
+  eventsToggle() {
+    let myEventsList = this.renderRoot.querySelector('.nav--mobile__list.myevents')
+    let mainListItems = this.renderRoot.querySelectorAll('.nav--mobile--lower>ul>li>a, .nav--mobile--lower>ul>li>button')
+
+    mainListItems.forEach((item)=> {
+      item.style.opacity = "0"
+      setTimeout(()=> {
+        item.style.display = "none"
+      }, "400")
+      setTimeout(()=> {
+        myEventsList.setAttribute('data-expanded', 'true')
+      }, "200")
+    })
+
+   
+  }
+
+  eventsBackToggle() {
+    
+    let myEventsList = this.renderRoot.querySelector('.nav--mobile__list.myevents')
+    let mainListItems = this.renderRoot.querySelectorAll('.nav--mobile--lower>ul>li>a, .nav--mobile--lower>ul>li>button')
+    
+    myEventsList.setAttribute('data-expanded', 'false')
+
+    mainListItems.forEach((item)=> {
+      item.style.display = "flex"
+      setTimeout(()=> {
+        item.style.opacity = "1"
+      }, "200")
+    })
+  }
+
+  profileToggle() {
+    let profileList = this.renderRoot.querySelector('.nav--mobile__list.profile')
+    let mainListItems = this.renderRoot.querySelectorAll('.nav--mobile--lower>ul>li>a, .nav--mobile--lower>ul>li>button')
+    
+    mainListItems.forEach((item)=> {
+      item.style.opacity = "0"
+      setTimeout(()=> {
+        item.style.display = "none"
+      }, "400")
+      setTimeout(()=> {
+        profileList.setAttribute('data-expanded', 'true')
+      }, "200")
+    })
+
+  }
+
+  profileBackToggle() {
+    
+    let profileList = this.renderRoot.querySelector('.nav--mobile__list.profile')
+    let mainListItems = this.renderRoot.querySelectorAll('.nav--mobile--lower>ul>li>a, .nav--mobile--lower>ul>li>button')
+    
+    profileList.setAttribute('data-expanded', 'false')
+
+    mainListItems.forEach((item)=> {
+      item.style.display = "flex"
+      setTimeout(()=> {
+        item.style.opacity = "1"
+      }, "200")
+    })
+  }
+
+  menuClick(e){
+    e.preventDefault()
+    const pathname = e.target.closest('a').pathname
+    gotoRoute(pathname)
+  }
   
   render(){    
     return html`
     <style>
+      * {
+        box-sizing: border-box;
+      }
       nav {
         box-sizing: border-box;
         margin: 0;
         height: fit-content;
         padding: 15px 30px;
         background-color: var(--ct-lightyellow);
-        border-radius: 100px;
+        border-radius: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -104,9 +204,13 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
         position: fixed;
         top: 30px;
-        left: 60px;
-        width: calc(100vw - 120px);
+        left: var(--ct-margins);
+        width: calc(100vw - 2*var(--ct-margins));
         z-index: 998;
+      }
+
+      .nav--mobile {
+        display: none;
       }
 
       a:has(.nav__logo) {
@@ -116,7 +220,6 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
 
       nav * {
         margin: 0;
-        box-sizing: border-box;
       }
 
       .nav__logo {
@@ -141,10 +244,11 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
         text-decoration: none;
         color: var(--ct-black);
         font-family: 'sofia-bold';
+        transition: opacity 0.4s;
       }
 
       .nav__link:hover, .nav__link:visited:hover, .nav__button:hover {
-        color: var(--ct-red);
+        color: var(--hover-color);
       }
 
       .nav__button {
@@ -186,14 +290,122 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
       }
 
+      sl-dropdown::part(panel) {
+        box-shadow: none;
+      }
+
       sl-menu-item::part(base):hover {
         background: var(--ct-midyellow);
+      }
+
+      @media screen and (max-width: 1024px) {
+        .nav--desktop {
+          display: none;
+        }
+
+        .nav--mobile {
+          display: flex;
+          flex-direction: column;
+          padding: 15px 30px;
+          justify-content: left;
+        }
+
+        .nav--mobile--upper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+
+        .nav--mobile--lower {
+          box-sizing: border-box;
+          overflow: hidden;
+          transition: all .5s;
+          height: 0;
+          width: 100%;
+          position: relative;
+          overflow-y: auto; /* may wanna remove this, bit inconsistent */
+        }
+
+        .nav--mobile--lower[data-expanded="false"] {
+          height: 0;
+        }
+
+        .nav--mobile--lower[data-expanded="true"] {
+          height: calc(100vh - 120px);
+          display: flex;
+          padding-top: 45px;
+        }
+
+        .nav--mobile__list {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          padding-inline-start: 0;
+          overflow-y: auto;
+          width: 100%;
+          overscroll-behavior: contain;
+          padding-bottom: 30px;
+        }
+
+        .nav--mobile__list li {
+          display: block;
+        }
+
+        .nav--mobile__list li a, .nav--mobile__list li button {
+          display: flex;
+          align-items: center;
+        }
+        .nav--mobile__list.secondary {
+          transition: 0.4s;
+          position: absolute;
+          top: 45px;
+          left: 20%;
+          opacity: 0;
+          visibility: hidden;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+        }
+        .nav--mobile__list.secondary[data-expanded="true"] {
+          overflow-y: auto;
+          visibility: visible;
+          left: 0;
+          opacity: 1;
+        }
+        .nav__link.secondary {
+          /* font-family: 'sofia-medium'; */
+        }
+
+        .nav__hamburger {
+          background-color: transparent;
+          border: none;
+          padding: 0;
+          margin: 0;
+          height: fit-content;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+
+        .nav__hamburger:hover {
+          color: var(--hover-color);
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        nav {
+          top: 15px;
+        }
+        .nav--mobile--lower[data-expanded="true"] {
+          max-height: calc(100vh - 60px;)
+        }
+        
       }
       
     </style>
 
-    <nav>
-      <a href="/dashboard" @click="${this.menuClick}"><img class="nav__logo" src="/images/ct-logo-2.svg" alt="Communiteam logo."></a>
+    <nav class="nav--desktop">
+      <a href="/dashboard" @click="${this.menuClick}"><img class="nav__logo" src="/images/ct-logo.svg" alt="Communiteam logo."></a>
       <ul class="nav__links">
         <li><a href="/dashboard" class="nav__link dashboard" @click="${this.menuClick}">${dashboardIcon}Dashboard</a></li>
         <li><a href="/explore" class="nav__link explore" @click="${this.menuClick}">${exploreIcon}Explore</a></li>
@@ -203,7 +415,7 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
             <button slot="trigger" class="nav__link nav__button myevents">${myEventsIcon}<p>My events</p></button>
             <sl-menu>
               <sl-menu-item><a href="/myEvents/posted" class="nav__link" @click="${this.menuClick}">${postIcon}Posted</a></sl-menu-item>
-              <sl-menu-item><a href="/myEvents/drafts" class="nav__link" @click="${this.menuClick}">${draftsIcon}Drafts</a></sl-menu-item>
+              <!--<sl-menu-item><a href="/myEvents/drafts" class="nav__link" @click="${this.menuClick}">${draftsIcon}Drafts</a></sl-menu-item>-->
               <sl-menu-item><a href="/myEvents/attending" class="nav__link" @click="${this.menuClick}">${attendingIcon}Attending</a></sl-menu-item>
               <sl-menu-item><a href="/myEvents/saved" class="nav__link" @click="${this.menuClick}">${savedIcon}Saved</a></sl-menu-item>
               <sl-menu-item><a href="/myEvents/newEvent" class="nav__link green" @click="${this.menuClick}">${postIcon}Post new event</a></sl-menu-item>
@@ -216,18 +428,18 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
           <sl-dropdown>
             <button slot="trigger" class="nav__link nav__button profile">
               ${this.user && this.user.avatar ?
-                html`<sl-avatar style="--size: 24px;" image='${App.apiBase}/images/${this.user.avatar}'}></sl-avatar>` : 
+                html`<sl-avatar style="--size: 24px;" image='${App.apiBase}/images/${this.user.avatar}'></sl-avatar>` : 
                 profileIcon
               }
               <p>
                 ${this.user && this.user.firstName ? 
-                  this.user.firstName : 
+                  Utils.toTitleCase(this.user.firstName) : 
                   'Profile'}
               </p>
             </button>
             <sl-menu>
               <sl-menu-item><a href="/profile" class="nav__link" @click="${this.menuClick}">${profileIconSml}Profile</a></sl-menu-item>
-              <sl-menu-item><a href="#" class="nav__link" @click="${() => Auth.signOut()}">${logoutIcon}Sign Out</a></sl-menu-item>
+              <sl-menu-item><a href="/" class="nav__link" @click="${() => Auth.signOut()}">${logoutIcon}Sign Out</a></sl-menu-item>
             </sl-menu>
           </sl-dropdown>
           <!--
@@ -240,6 +452,36 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
         </li>
       </ul>
     </nav>
+    <nav class="nav--mobile">
+      <div class="nav--mobile--upper">
+        <a href="/dashboard" @click="${this.menuClick}"><img class="nav__logo" src="/images/ct-logo.svg" alt="Communiteam logo."></a>
+        <button class="nav__hamburger" @click="${this.hamburgerToggle}" aria-expanded="false" aria-controls="nav--mobile--lower">${hamburgerIcon}</button>
+      </div>
+      
+      <div class="nav--mobile--lower" id="nav--mobile--lower" data-expanded="false">
+        <ul class="nav--mobile__list">
+          <li><a href="/dashboard" @click="${this.menuClick}" class="nav__link dashboard">${dashboardIcon}Dashboard</a></li>
+          <li><a href="/explore" @click="${this.menuClick}" class="nav__link explore">${exploreIcon}Explore</a></li>
+          <li>
+            <button class="nav__link nav__button myevents" @click="${this.eventsToggle}" aria-expanded="false" aria-controls="myevents--list">${myEventsIcon}My events${rightChevronIcon}</button>
+            <ul class="nav--mobile__list secondary myevents" data-expanded="false" id="myevents--list">
+              <li><button class="nav__link nav__button secondary" @click="${this.eventsBackToggle}">${leftChevronIcon}Back</button></li>
+              <li><a class="nav__link secondary" href="/myEvents/posted" @click="${this.menuClick}">${postIcon}Posted</a></li>
+              <!--<li><a class="nav__link secondary" href="/myEvents/drafts" @click="${this.menuClick}">${draftsIcon}Drafts</a></li>-->
+              <li><a class="nav__link secondary" href="/myEvents/attending" @click="${this.menuClick}">${attendingIcon}Attending</a></li>
+              <li><a class="nav__link secondary" href="/myEvents/saved" @click="${this.menuClick}">${savedIcon}Saved</a></li>
+              <li><a class="nav__link secondary green" href="/myEvents/newEvent" @click="${this.menuClick}">${postIcon}Post new event</a></li>
+            </ul>
+          </li>
+            
+          <li><a href="/messages" @click="${this.menuClick}" class="nav__link messages">${messagesIcon}Messages</a></li>
+          <li><a href="/profile" @click="${this.menuClick}" class="nav__link profile">${profileIcon}Profile</a></li>
+          <li><a href="/" class="nav__link" @click="${() => Auth.signOut()}">${logoutIcon}Sign Out</a></li>
+            
+        </ul>
+      </div>
+        
+      </nav>
     `
   }
   

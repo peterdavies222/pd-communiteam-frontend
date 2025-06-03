@@ -3,16 +3,65 @@ import {html, render } from 'lit'
 import {gotoRoute, anchorRoute } from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import EventAPI from '../../EventAPI'
 
 class DashboardView {
-  init(){    
+  async init(){    
     console.log('DashboardView.init')
     document.title = 'Dashboard'    
+    this.attendingEventIds = Auth.currentUser.attendingEvents
+    this.upcomingEvents = null
+    this.savedEvents = null
+    this.savedEventIds = Auth.currentUser.savedEvents
+    await this.upcoming()
+    await this.saved()
     this.render()    
     Utils.pageIntroAnim()
     Utils.scrollButtons('suggested')
     Utils.scrollButtons('upcoming')
   }
+
+  menuClick(e){
+    e.preventDefault()
+    const pathname = e.target.closest('a').pathname
+    gotoRoute(pathname)
+  }
+
+  async upcoming() {
+    try {
+          this.attendingEvents = await Promise.all(
+            this.attendingEventIds.map(async id => await EventAPI.getEvent(id))
+          )
+          console.log(this.attendingEvents)
+        } catch(err) {
+          Toast.show(err, 'error')
+        }
+    // this.events = await EventAPI.getEvents()
+    // console.log(this.events)
+    // this.attendingEvents = this.events.filter(event => event.attendingUsers.includes(Auth.currentUser._id))
+    // console.log(this.attendingEvents)
+    const now = new Date()
+    console.log(now)
+    const oneWeekFromNow = new Date()
+    oneWeekFromNow.setDate(now.getDate() + 7)
+    console.log(oneWeekFromNow)
+    this.upcomingEvents = this.attendingEvents.filter(event => {
+      const eventDate = new Date(event.date)
+      return eventDate >= now && eventDate <= oneWeekFromNow
+    })
+    console.log("upcoming events = ", this.upcomingEvents)
+  }
+
+  async saved() {
+      try {
+          this.savedEvents = await Promise.all(
+            this.savedEventIds.map(async id => await EventAPI.getEvent(id))
+          )
+          console.log(this.savedEvents)
+        } catch(err) {
+          Toast.show(err, 'error')
+        }
+    }
 
   render(){
     const template = html`
@@ -21,7 +70,7 @@ class DashboardView {
         <ct-nav
         section="dashboard"
         messagecount="2"
-        user="false"
+        user="${JSON.stringify(Auth.currentUser)}"
         >
         </ct-nav>
 
@@ -63,26 +112,38 @@ class DashboardView {
             </div>
           </div>
           <div class="carousel" id="upcoming__carousel">
-            <ct-event></ct-event>
-            <ct-event></ct-event>
-            <ct-event></ct-event>
-            <ct-event></ct-event>
-            <ct-event></ct-event>
+            ${this.upcomingEvents.map(event => html`
+                <ct-event
+                  name="${event.name}"
+                  date="${event.date}"
+                  location="${event.location}"
+                  description="${event.description}"
+                  .images="${event.images}"
+                  url="/event?id=${event._id}"
+                ></ct-event>
+              `)}
           </div>
         </div>
 
         <div class="content-frame">
           <div class="title">
-            <h2>Suggested activities for you</h2>
+            <h2>Your saved events</h2>
             <div class="title__buttons" id="suggested__buttons">
               <button class="scroll-button" id="suggested__left"><i class="fa-solid fa-chevron-left"></i></button>
               <button class="scroll-button" id="suggested__right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
           <div class="carousel" id="suggested__carousel">
-            <ct-event></ct-event>
-            <ct-event></ct-event>
-            <ct-event></ct-event>
+            ${this.savedEvents.map(event => html`
+                <ct-event
+                  name="${event.name}"
+                  date="${event.date}"
+                  location="${event.location}"
+                  description="${event.description}"
+                  .images="${event.images}"
+                  url="/event?id=${event._id}"
+                ></ct-event>
+              `)}
           </div>
         </div>
        

@@ -34,7 +34,8 @@ customElements.define('ct-footer', class Communiteam extends LitElement {
         border-top: solid var(--ct-black) 2px;
         margin-top: 60px;
         background-color: var(--ct-darkgrey);
-        padding: 60px;
+        padding-block: 60px;
+        padding-inline: var(--ct-margins);
         width: 100vw;
         display: flex;
         justify-content: space-between;
@@ -59,6 +60,12 @@ customElements.define('ct-footer', class Communiteam extends LitElement {
         font-family: 'sofia-regular';
         font-size: calc(12rem / 16);
         color: var(--ct-lightgrey);
+      }
+      @media screen and (max-width: 768px) {
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
       }
     </style>
   

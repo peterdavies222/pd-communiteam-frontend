@@ -40,9 +40,6 @@ h2 {
   align-items: center;
   margin-bottom: 30px;
 
-  h2 {
-    //letter-spacing: 1px; // experimenting
-  }
 
   &__buttons {
     display: flex;
@@ -205,6 +202,10 @@ a {
 .main-content.horizontal {
   flex-direction: row;
   gap: 30px;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 }
 
 // .page-centered {
@@ -259,6 +260,13 @@ a {
   &::-webkit-scrollbar {
     visibility: hidden;
   }
+  ct-event {
+    max-width: 100%;
+  }
+}
+
+.carousel:has(> :nth-child(2)) ct-event {
+  max-width: calc(100vw - 3 * var(--ct-margins));
 }
 
 // RESPONSIVE - MOBILE -------------------
@@ -269,3 +277,12 @@ a {
 //     max-width: none;
 //   }
 // }
+
+@media screen and (max-width: 500px) {
+  .title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+

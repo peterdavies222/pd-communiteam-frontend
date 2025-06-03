@@ -10,15 +10,23 @@
         height: 100vh;
         padding: 30px 60px;
         flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &::after {
+            content: '';
+            height: 67px;
+        }
     }
 
     &__title {
         width: 100%;
-        margin-bottom: 160px;
     }
 
     &__logo {
         width: 270px;
+        max-width: 100%;
     }
 
     &__tagline {
@@ -31,6 +39,7 @@
 
     &__form {
         width: clamp(50%, 375px, 100%);
+        overflow-y: auto;
 
         h1 {
             text-transform: uppercase;
@@ -45,6 +54,8 @@
         label {
             font-family: 'sofia-bold';
             color: var(--ct-black);
+            display: block;
+            margin-bottom: 5px;
         }
 
         sl-input {
@@ -101,3 +112,43 @@
 #root:has(main.signinup) {
     overflow: hidden;
 }
+
+@media screen and (max-width: 1024px) {
+    .signinup {
+        flex-direction: column;
+
+        &__left {
+            width: 100%;
+            padding: 30px var(--ct-margins);
+
+            &::after {
+                height: 0;
+            }
+        }
+
+        &__form {
+            width: 100%;
+            background-color: var(--ct-lightyellow-translucent);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 30px;
+        }
+
+        &__right {
+            position: absolute;
+            z-index: -1;
+            clip-path: none;
+            width: 100%;
+        }
+
+        &__image {
+            object-position: 20% 50%;
+        }
+    }
+
+    // #root:has(main.signinup) {
+    //     overflow: auto;
+    // }
+}
+

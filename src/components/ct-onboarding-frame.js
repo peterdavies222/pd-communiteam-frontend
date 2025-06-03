@@ -41,12 +41,14 @@ customElements.define('ct-onboarding-frame', class Communiteam extends LitElemen
       }
       .wrap {
         width: 100%;
-        height: 100%;
+        height: fit-content;
+        overflow-y: auto;
       }
       img {
         display: block;
         width: calc(100% - 120px);
-        height: 424px;
+        /* height: 424px; */
+        aspect-ratio: 16/9;
         object-fit: cover;
         object-position: 0% 0%;
         margin: auto;

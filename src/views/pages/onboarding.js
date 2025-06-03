@@ -3,6 +3,8 @@ import {html, render } from 'lit'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import Toast from '../../Toast'
+import UserAPI from '../../UserAPI'
 
 class OnboardingView {
   init(){
@@ -10,6 +12,17 @@ class OnboardingView {
     this.render()    
     Utils.pageIntroAnim()
     Utils.onboarding()
+    this.updateCurrentUser()
+  }
+
+  async updateCurrentUser(){
+    try {
+      const updatedUser = await UserAPI.updateUser(Auth.currentUser._id, { newUser: false }, 'json')
+      console.log('user updated')
+      console.log(updatedUser)
+    }catch(err) {
+      Toast.show(err, 'error')
+    }
   }
 
   render(){
@@ -40,6 +53,7 @@ class OnboardingView {
               image="images/profile.png" title="Profile" message="Easily review and update your information."></ct-onboarding-frame>
             </div>
             <button class="onboarding__button right scroll-button"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="button button--solid onboarding-finish-button" @click=${() => gotoRoute('/dashboard')}><p>Get sporting!</p><i class="fa-solid fa-chevron-right"></i></button>
           </div>
 
           <!-- may want to use glider js for the onboarding carousel ?? -->

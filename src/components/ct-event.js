@@ -22,8 +22,8 @@ customElements.define('ct-event', class Communiteam extends LitElement {
       description: {
         type: String
       },
-      image: {
-        type: String
+      images: {
+        type: Array
       },
       url: {
         type: String
@@ -47,6 +47,14 @@ customElements.define('ct-event', class Communiteam extends LitElement {
   testHandler(){
     alert("test")
   }
+
+  menuClick(e){
+    e.preventDefault()
+    e.stopImmediatePropagation()
+  const href = e.target.closest('a').href // get full URL (with query string)
+  const url = new URL(href)               // parse URL safely
+  gotoRoute(url.pathname + url.search)    // preserve path + query params
+  }
   
   render(){    
     return html`
@@ -56,6 +64,7 @@ customElements.define('ct-event', class Communiteam extends LitElement {
       }
       .event {
         width: 300px;
+        max-width: 100%;
         ${this.type == 'grid' ? 'width: 100%;' : ''}
         height: fit-content;
         margin-bottom: 5px;
@@ -149,13 +158,13 @@ customElements.define('ct-event', class Communiteam extends LitElement {
 
     <div class="event ${this.orientation == 'horizontal' ? 'event--horizontal' : ''}">
       <div class="event__image">
-        <img src="${App.apiBase}/images/${this.image}" alt="Image of ${this.image}.">
+        <img src="${App.apiBase}/images/${this.images?.[0].imageUrl}" alt="Image of ${this.name}.">
       </div>
       <div class="event__text">
-        <p class="event__details">${this.date ? this.date : 'DATE HERE'}, ${this.location ? this.location : 'LOCATION HERE'}</p>
+        <p class="event__details">${this.date ? new Date(this.date).toDateString() : 'DATE HERE'}, ${this.location ? this.location : 'LOCATION HERE'}</p>
         <h3 class="event__name">${this.name ? this.name : 'NAME HERE'}</h3>
         <p class="event__description">${this.description ? this.description : 'DESCRIPTION HERE'}</p>
-        ${this.section == 'drafts' ? html`<a href="${this.url}" class="event__button dashed">Edit draft</a>` : html`<a href="${this.url}" class="event__button">View details</a>`}
+        ${this.section == 'drafts' ? html`<a href="${this.url.bind(this)}" class="event__button dashed" @click="${this.menuClick}">Edit draft</a>` : html`<a href="${this.url}" @click="${()=>this.menuClick.bind(this)}" class="event__button">View details</a>`}
       </div>
       
     </div>    

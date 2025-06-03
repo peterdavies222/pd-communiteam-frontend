@@ -76,6 +76,7 @@ customElements.define('ct-message', class Communiteam extends LitElement {
         justify-content: center;
         align-items: center;
         text-transform: uppercase;
+        object-fit: cover;
       }
       p.message__avatar {
         margin: 0;

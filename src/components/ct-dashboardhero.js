@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit'
 import {anchorRoute, gotoRoute} from '../Router'
 import Auth from '../Auth'
 import App from '../App'
+import Utils from '../Utils'
 
 customElements.define('ct-dashboardhero', class Communiteam extends LitElement {
   constructor(){
@@ -44,8 +45,13 @@ customElements.define('ct-dashboardhero', class Communiteam extends LitElement {
 
       .dashboardhero img {
         width: 100%;
-        position: absolute;
-        top: -50px;
+        height: 100%;
+        object-fit: cover;
+        object-position: 0% 15%;
+        /* height: calc(100% + 50px);
+        object-fit: cover; */
+        /* position: absolute;
+        top: -50px; */
       }
 
       .dashboardhero__gradient {
@@ -53,7 +59,7 @@ customElements.define('ct-dashboardhero', class Communiteam extends LitElement {
         height: 300px;
         position: absolute;
         bottom: -1px;
-        background: linear-gradient(0deg, var(--ct-lightyellow) 0%, var(--ct-lightyellow-transparent) 100%);
+        background: linear-gradient(0deg, var(--ct-lightyellow) 0%, rgba(0, 0, 0, 0) 100%);
       }
 
       .dashboardhero__text {
@@ -78,13 +84,28 @@ customElements.define('ct-dashboardhero', class Communiteam extends LitElement {
         color: var(--ct-darkgrey);
         font-size: calc(20rem / 16);
       }
+
+      @media screen and (max-width: 1024px) {
+        /* .dashboardhero {
+          height: 350px;
+        } */
+        .dashboardhero img {
+          object-position: 100% 0%;
+        }
+        /* .dashboardhero__gradient {
+          background: linear-gradient(180deg, var(--ct-green) 0%, rgba(0, 0, 0, 0) 100%);
+          height: 100%;
+          bottom: 0;
+          opacity: 30%;
+        } */
+      }
     </style>
 
     <div class="dashboardhero">
       <img src="${this.image}" alt="Hero image.">
       <div class="dashboardhero__gradient"></div>
       <div class="dashboardhero__text">
-        <h1 class="dashboardhero__title">Welcome back, ${this.user.firstName}!</h1>
+        <h1 class="dashboardhero__title">Welcome back, ${Utils.toTitleCase(this.user.firstName)}!</h1>
         <h2 class="dashboardhero__message">${this.message ? this.message : 'Ready to find your sporting community?'}</h2>
       </div>
     </div>

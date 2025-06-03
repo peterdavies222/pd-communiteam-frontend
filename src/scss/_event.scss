@@ -1,0 +1,197 @@
+.event-gradient {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg,var(--ct-yellow) 0%, rgba(0, 0, 0, 0) 100%);
+    opacity: 70%;
+}
+
+.event {
+    &.main-content {
+        margin-top: 150px;
+    }
+
+    .event-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 90px;
+    }
+
+    .event-title--left {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .event-title__back-btn {
+        text-decoration: none;
+        color: var(--ct-darkgrey);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: 0;
+    }
+
+    .event-title__title {
+        font-family: 'veneer-regular';
+        font-size: 60px;
+    }
+
+    .event-title--left--lower {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .event-title__host, .event-title__attending {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+
+        p {
+            font-family: 'sofia-bold';
+            margin: 0;
+        }
+    }
+    
+    .highlighted-text {
+        color: var(--ct-green);
+    }
+
+    sl-avatar {
+    --size: 30px;
+    }
+
+    .avatar-group {
+
+        sl-avatar:not(:first-of-type) {
+            margin-left: -13px;
+            
+            &::part(base) {
+                box-shadow: -2px 0px 2px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .event-title--right {
+        display: flex;
+        gap: 10px;
+        align-self: center;
+    }
+    
+    .event-button {
+        gap: 10px;
+        font-family: 'sofia-bold';
+        align-self: stretch;
+
+        &.cancel {
+            border-color: var(--ct-red);
+
+            &:hover {
+                background-color: var(--ct-lightred);
+                border-color: var(--ct-lightred);
+            }
+        }
+    }
+
+    .event__images__container {
+        margin-bottom: 30px;
+    }
+
+    .event__images {
+        display: flex;
+        gap: 30px;
+        overflow-x: auto;
+        margin-inline: calc(-1 * var(--ct-margins));
+        padding-inline: var(--ct-margins);
+        margin-bottom: 15px;
+        scroll-behavior: smooth;
+    }
+
+    .event__images__buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+
+    .scroll-button svg {
+        width: 100px;
+    }
+
+    .event__images::-webkit-scrollbar {
+        visibility: hidden;
+    }
+
+    .event-image {
+        flex-shrink: 0;
+        width: 400px;
+        aspect-ratio: calc(16 / 9);
+        background: var(--ct-yellow);
+        border-radius: 5px;
+        max-width: calc(100vw - 2 * var(--ct-margins));
+        object-fit: cover;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 5px;
+    }
+
+    .event__images:has(> :nth-child(2)) .event-image {
+        max-width: calc(100vw - 3 * var(--ct-margins));
+    }
+
+    .event__info {
+
+        p {
+            max-width: 750px;
+        }
+
+        .details__list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            li {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+
+                svg {
+                    color: var(--ct-red);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .event {
+        .event-title {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 45px;
+        }
+        .event-title--right {
+            align-self:unset;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .event {
+        .event-title--right {
+            width: 100%;
+            flex-direction: column;
+        }
+        .event-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}

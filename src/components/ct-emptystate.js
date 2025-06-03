@@ -2,6 +2,8 @@ import { LitElement, html } from 'lit'
 import {anchorRoute, gotoRoute} from '../Router'
 import Auth from '../Auth'
 import App from '../App'
+import Toast from '../Toast'
+import UserAPI from '../UserAPI'
 
 customElements.define('ct-emptystate', class Communiteam extends LitElement {
   constructor(){
@@ -27,6 +29,9 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
       },
       buttonurl: {
         type: String
+      },
+      action: {
+        type: String
       }
     }
   }
@@ -38,6 +43,34 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
   testHandler(){
     alert("test")
   }
+
+  menuClick(e){
+    e.preventDefault()
+    const pathname = e.target.closest('a').pathname
+    gotoRoute(pathname)
+  }
+
+  async verify() {
+    try {
+      // Save current path
+      const currentPath = window.location.pathname
+
+      const updatedUser = await UserAPI.updateUser(Auth.currentUser._id, {accessLevel: 2})
+      this.user = await updatedUser
+      Auth.currentUser = updatedUser
+      console.log(updatedUser)
+      console.log(`Access level = ${Auth.currentUser.accessLevel}`)
+      
+      // Simulate navigation away and back to trigger popstate
+      window.history.pushState({}, '', '/temp')
+      window.history.replaceState({}, '', currentPath)
+      window.dispatchEvent(new PopStateEvent('popstate'))
+
+      Toast.show(`You're now verified!`)
+      }catch(err) {
+      Toast.show(err, 'error')
+    }
+  }
   
   render(){    
     return html`
@@ -45,16 +78,17 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
       .empty-state {
         margin: auto;
         width: 480px;
+        max-width: 100%;
         text-align: center;
         display: flex;
         flex-direction: column;
         gap: 60px;
-        margin-bottom: 60px;
       }
       .empty-state__image {
         align-self: center;
         margin: 0;
         width: 300px;
+        max-width: 100%;
       }
       .empty-state__text {
         display: flex;
@@ -82,6 +116,9 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
         align-self: center;
         border-radius: 15px;
       }
+      button {
+        border: none;
+      }
       .empty-state__button:hover {
         background-color: var(--ct-tintedgreen);
       }
@@ -94,7 +131,8 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
         <p class="empty-state__message">${this.message ? this.message : 'Empty state message'}</p>
         
       </div>
-      ${this.buttonurl ? html`<a class="empty-state__button" href="${this.buttonurl}">${this.buttonlabel ? this.buttonlabel : 'label'}</a>` : ''}
+      ${this.buttonurl ? html`<a class="empty-state__button" href="${this.buttonurl}" @click="${this.menuClick}">${this.buttonlabel ? this.buttonlabel : 'label'}</a>` : 
+      html`<button class="empty-state__button" @click=${this.action === 'verify' ? () => this.verify() : null}>${this.buttonlabel ? this.buttonlabel : 'label'}</button>`}
     </div>
     `
   }

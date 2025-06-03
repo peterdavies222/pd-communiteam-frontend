@@ -8,5 +8,89 @@
     ct-event {
         flex-grow: 0;
         width: 300px;
+        max-width: 100%;
     }
+}
+
+.new-event {
+    .input-group {
+        margin-bottom: 30px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-family: 'sofia-bold';
+        font-size: calc(20rem / 16);
+    }
+
+    input[type="file"]::file-selector-button {
+        background-color: transparent;
+        border: solid var(--ct-green) 2px;
+        padding: 5px 10px;
+        color: var(--ct-darkgrey);
+        font-family: 'sofia-bold';
+        border-radius: 100px;
+        margin-right: 15px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--ct-tintedgreen);
+            border-color: var(--ct-tintedgreen);
+        }
+    }
+
+    .button-container {
+        text-align: center;
+    }
+
+    sl-button {
+        text-align: center;
+        margin-top: 30px;
+        margin-inline: auto;
+
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
+    }
+
+    sl-button::part(base) {
+        background-color: var(--ct-green);
+        border: none;
+        border-radius: 100px;
+        color: var(--ct-darkgrey);
+        font-family: 'sofia-bold';
+        font-size: 1rem;
+        padding: 5px 20px;
+        display: flex;
+        align-items: center;
+
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
+        
+
+        &:hover {
+            background-color: var(--ct-tintedgreen);
+        }
+    }
+
+    .input-group-pair {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 30px;
+
+        .input-group {
+            flex-grow: 1;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .input-group-pair {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
 }

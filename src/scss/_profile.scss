@@ -1,9 +1,18 @@
 .profile {
 
-    .content-frame:not(:last-of-type) {
+    .content-frame:not(:last-child) {
         padding-bottom: 60px;
         border-bottom: solid var(--ct-midgrey) 1px;
         margin-bottom: 60px;
+    }
+
+    .editing-buttons {
+        display: flex;
+        gap: 15px;
+
+        button {
+            align-self: stretch;
+        }
     }
     
     .profile__item {
@@ -28,6 +37,39 @@
             font-size: 1rem;
         }
 
+        .avatar-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 15px;
+
+            #avatar-input {
+                visibility: hidden;
+            }
+
+            #edit-avatar-btn {
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translate(-50%, 30%);
+                background: var(--ct-green);
+                border: none;
+                width: 40px;
+                aspect-ratio: 1;
+                border-radius: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                color: var(--ct-darkgrey);
+
+                &:hover {
+                    background-color: var(--ct-tintedgreen);
+                }
+            }
+        }
+
         sl-avatar {
             --size: 140px;
             border: solid var(--ct-midgrey) 1px;
@@ -35,15 +77,80 @@
             width: fit-content;
             margin: 0;
         }
+
+        sl-input, sl-select, sl-textarea {
+            max-width: 50%;
+        }
+
     }
 
     .delete-account-button {
         color: var(--ct-black);
         background-color: var(--ct-red);
         text-decoration: none;
-        font-family: 'sofia-medium';
-        padding: 5px 15px;
+        font-family: 'sofia-bold';
+        padding: 10px 15px;
         border-radius: 5px;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--ct-darkred);
+        }
+
+        &.inactive {
+            background-color: var(--ct-midgrey);
+            cursor:unset;
+        }
     }
 
+    #public-details-edit, #private-details-edit {
+            display: none;
+        }
+
+    
+
 }
+
+@media screen and (max-width: 768px) {
+    .profile .profile__item {
+        sl-input, sl-select, sl-textarea {
+            max-width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profile {
+        .title {
+            button {
+                align-self: flex-start;
+            }
+        }
+        
+    }
+}
+
+.delete-account-dialog {
+    &::part(panel) {
+        background-color: var(--ct-lightyellow);
+        border-radius: 30px;
+        max-height: 50vh;
+        max-width: calc(100vw - 2*var(--ct-margins));
+    }
+
+    &::part(title) {
+        color: var(--ct-darkred);
+    }
+
+    & sl-button::part(base) {
+        background-color: var(--ct-red);
+        border: none;
+        color: var(--ct-black);
+    }
+
+    & sl-button::part(label) {
+        font-family: 'sofia-bold' !important;
+    }
+}
+

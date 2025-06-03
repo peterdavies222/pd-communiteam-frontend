@@ -64,10 +64,20 @@ customElements.define('ct-heroimage', class Communiteam extends LitElement {
           left: 0;
           background: linear-gradient(90deg,rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
         }
+        @media screen and (max-width: 1024px) {
+          .heroimage__gradient {
+            width: 100%;
+          }
+        }
+        @media screen and (max-width: 500px) {
+          .heroimage__gradient {
+            width: 150%;
+          }
+        }
         .heroimage__text {
           width: calc(100% - 120px);
           position: absolute;
-          left: 60px;
+          left: var(--ct-margins);
           bottom: 60px;
           display: flex;
           justify-content: space-between;

@@ -54,15 +54,16 @@ class Auth {
 
     // sign in success
     const data = await response.json()
-    Toast.show(`Welcome  ${data.user.firstName}`)
+    Toast.show(`Welcome to Communiteam, ${data.user.firstName}!`)
     // save access token (jwt) to local storage
     localStorage.setItem('accessToken', data.accessToken)
     // set current user
     this.currentUser = data.user      
+    console.log(this.currentUser.newUser)
     // console.log(this.currentUser)           
     // redirect to home
     Router.init()
-    gotoRoute('/dashboard')
+    gotoRoute(this.currentUser.newUser === true ? '/onboarding' : '/dashboard')
   }
 
 

@@ -18,6 +18,8 @@ import attendingView from './views/pages/myEvents/attending'
 import savedView from './views/pages/myEvents/saved'
 import newEventView from './views/pages/myEvents/newEvent'
 
+import eventView from './views/pages/event'
+
 import messagesView from './views/pages/messages'
 
 // define routes
@@ -35,6 +37,8 @@ const routes = {
 	'/myEvents/attending': attendingView,
 	'/myEvents/saved': savedView,
 	'/myEvents/newEvent': newEventView,
+
+	'/event': eventView,
 
 	'/messages': messagesView,
 
@@ -71,6 +75,40 @@ class Router {
 			// show 404 view instead
 			this.routes['404'].init()			
 		}
+
+		// const pathname = fullPathname.split('?')[0];
+
+		// let matchedRoute = null;
+		// let routeParams = {};
+
+		// for (const routePath in this.routes) {
+		// 	// Convert dynamic route paths like "/event/:id" to regex
+		// 	const paramNames = [];
+		// 	const regexPath = routePath.replace(/:([^\/]+)/g, (_, key) => {
+		// 		paramNames.push(key);
+		// 		return '([^\\/]+)';
+		// 	});
+
+		// 	const regex = new RegExp(`^${regexPath}$`);
+		// 	const match = pathname.match(regex);
+
+		// 	if (match) {
+		// 		matchedRoute = this.routes[routePath];
+		// 		// Build params object
+		// 		paramNames.forEach((key, index) => {
+		// 			routeParams[key] = match[index + 1];
+		// 		});
+		// 		break;
+		// 	}
+		// }
+
+		// if (matchedRoute) {
+		// 	// Call init with route params
+		// 	matchedRoute.init(routeParams);
+		// } else {
+		// 	// Fallback to 404
+		// 	this.routes['404'].init();
+		// }
 	}
 
 	gotoRoute(pathname){

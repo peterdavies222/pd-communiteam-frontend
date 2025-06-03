@@ -3,17 +3,31 @@ import {html, render } from 'lit'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import Toast from '../../Toast'
+import EventAPI from '../../EventAPI'
 
 
 
 class ExploreView {
   init(){
-    document.title = 'Explore'    
+    document.title = 'Explore'   
+    this.events = null 
+    this.getEvents()
     this.render()    
     Utils.pageIntroAnim()
     Utils.filtersTriggers()
     Utils.dropdownClosePrevention()
   }
+
+  async getEvents() {
+      try {
+        this.events = await EventAPI.getEvents()
+        console.log(this.events)
+        this.render()
+      } catch(err) {
+        Toast.show(err, 'error')
+      }
+    }
 
   render(){
 
@@ -83,10 +97,21 @@ class ExploreView {
           </div>
 
           <div class="explore__events">
-            <ct-event orientation="horizontal"></ct-event>
-            <ct-event orientation="horizontal"></ct-event>
-            <ct-event orientation="horizontal"></ct-event>
-            <ct-event orientation="horizontal"></ct-event>
+            ${this.events !== null ?
+              this.events.map(event => html`
+                <ct-event
+                name="${event.name}"
+                .images="${event.images}"
+                date="${event.date}"
+                description="${event.description}"
+                location="${event.location}"
+                url="/event?id=${event._id}"
+                orientation="horizontal"
+                ></ct-event>`)
+                :
+                html`<p>No events found!</p>`
+
+            }
           </div>
           
         </div>
@@ -165,10 +190,9 @@ class ExploreView {
                 <div class="modal__content-frame">
                   <sl-radio-group label="Difficulty">
                     <sl-radio-button value="1" pill>Do not specify</sl-radio-button>
-                    <sl-radio-button value="2" pill>Total beginner</sl-radio-button>
-                    <sl-radio-button value="3" pill>Some knowledge</sl-radio-button>
-                    <sl-radio-button value="4" pill>Intermediate</sl-radio-button>
-                    <sl-radio-button value="5" pill>Advanced</sl-radio-button>
+                    <sl-radio-button value="2" pill>Easy</sl-radio-button>
+                    <sl-radio-button value="3" pill>Medium</sl-radio-button>
+                    <sl-radio-button value="5" pill>Hard</sl-radio-button>
                   </sl-radio-group>
                 </div>
               </div>

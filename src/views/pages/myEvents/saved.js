@@ -3,13 +3,29 @@ import {html, render } from 'lit'
 import {gotoRoute, anchorRoute} from '../../../Router'
 import Auth from '../../../Auth'
 import Utils from '../../../Utils'
+import Toast from '../../../Toast'
+import EventAPI from '../../../EventAPI'
 
 class SavedView {
-  init(){
+  async init(){
     document.title = 'Saved Events'    
+    this.savedEvents = null
+    this.savedEventIds = Auth.currentUser.savedEvents
+    await this.saved()
     this.render()    
     Utils.pageIntroAnim()
   }
+
+  async saved() {
+        try {
+            this.savedEvents = await Promise.all(
+              this.savedEventIds.map(async id => await EventAPI.getEvent(id))
+            )
+            console.log(this.savedEvents)
+          } catch(err) {
+            Toast.show(err, 'error')
+          }
+      }
 
   render(){
     const template = html`
@@ -27,38 +43,38 @@ class SavedView {
     <main class="main-content">
 
       <!-- If user has no saved events -->
-      <ct-emptystate
+      ${Auth.currentUser.savedEvents.length == 0 ?
+        html`      
+        <ct-emptystate
       title="Hmm, looks like you haven't saved any events yet..."
       message="It's never too late to find and join a Communiteam event!"
       buttonlabel="Explore events"
       buttonurl="/explore"
-      ></ct-emptystate>
+      ></ct-emptystate>`
 
+      : html`
       <!-- If user has saved events -->
-      <div class="content-frame">
-        <div class="title">
-          <h2>This week</h2>
-        </div>
-        <div class="events-grid">
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
-        </div>
-      </div>
 
-      <div class="content-frame">
-        <div class="title">
-          <h2>Next week</h2>
-        </div>
+
         <div class="events-grid">
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
-          <ct-event type="grid"></ct-event>
+          ${this.savedEvents.map(event => html`
+            <ct-event
+              name="${event.name}"
+              date="${event.date}"
+              location="${event.location}"
+              description="${event.description}"
+              .images="${event.images}"
+              url="/event?id=${event._id}"
+              type="grid"
+            ></ct-event>
+              `)}
         </div>
-      </div>
+      `
+      }
+
+
+      
+
     </main>
 
     <ct-footer></ct-footer>
