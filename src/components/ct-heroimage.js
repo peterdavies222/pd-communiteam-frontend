@@ -100,7 +100,7 @@ customElements.define('ct-heroimage', class Communiteam extends LitElement {
       </style>
 
       <div class="heroimage">
-          <img class="heroimage__image" src="${this.image ? this.image : '/images/rackets.jpeg'}" alt="Hero image">
+          <img class="heroimage__image" src="${this.image ? this.image : '/images/rackets.jpg'}" alt="Hero image">
           <div class="heroimage__gradient"></div>
           <div class="heroimage__text">
             <h1 class="heroimage__title">${this.title ? this.title : 'TITLE'}</h1>

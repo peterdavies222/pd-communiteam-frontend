@@ -57,7 +57,7 @@ class SignUpView{
           </form>
         </div>
         <div class="signinup__right">
-          <img class="signinup__image" src="../images/signinup.png" alt="People running.">
+          <img class="signinup__image" src="../images/signinup.jpg" alt="People running.">
         </div>
       </main>
     `

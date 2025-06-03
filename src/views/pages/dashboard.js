@@ -76,7 +76,7 @@ class DashboardView {
 
         <ct-dashboardhero
         user=${JSON.stringify(Auth.currentUser)}
-        image="/images/dashboard-hero.jpeg"
+        image="/images/dashboard-hero.jpg"
         ></ct-dashboardhero>
       </header>
       
