@@ -9,10 +9,10 @@ import EventAPI from '../../EventAPI'
 
 
 class ExploreView {
-  init(){
+  async init(){
     document.title = 'Explore'   
-    this.events = null 
-    this.getEvents()
+    this.events = null
+    await this.getEvents()
     this.render()    
     Utils.pageIntroAnim()
     Utils.filtersTriggers()
@@ -23,11 +23,75 @@ class ExploreView {
       try {
         this.events = await EventAPI.getEvents()
         console.log(this.events)
-        this.render()
       } catch(err) {
         Toast.show(err, 'error')
       }
     }
+
+    async clearFilters() {
+      console.log('clearing events')
+      let inputs = document.querySelectorAll('.quick-filters-input')
+      inputs.forEach(input => {
+        input.value = ''
+      })
+      await this.getEvents()
+      this.render()
+    }
+
+  async handleFilterBtn(field, match) {
+    console.log('filtering events...')
+    console.log('field = ', field)
+    console.log('match = ', match)
+    if(!field || !match) return
+    this.events = await EventAPI.getEvents()
+
+    const selects = document.querySelectorAll('.quick-filters-input')
+    selects.forEach(select => {
+      const id = select.id || ''
+      if (!id.includes(field)) {
+        select.value = '' // clear select if it's not the current field
+      }
+    })
+
+    let filteredEvents
+
+    if(field == "sport") {
+      filteredEvents = this.events.filter((event) => event.sport == match)
+    }
+
+    if(field == "difficulty") {
+      filteredEvents = this.events.filter((event)=> event.difficulty == match)
+    }
+
+    if(field == "groupsize") {
+      filteredEvents = this.events.filter((event)=> event.groupSize == match)
+    }
+
+    if(field == "date") {
+      const now = new Date()
+      const startOfToday = new Date(now.setHours(0, 0, 0, 0))
+      const oneWeekFromNow = new Date(startOfToday.getTime() + 7 * 24 * 60 * 60 * 1000)
+      const twoWeeksFromNow = new Date(startOfToday.getTime() + 14 * 24 * 60 * 60 * 1000)
+      filteredEvents = this.events.filter((event)=> {
+        const eventDate = new Date(event.date)
+        if (match === "this-week") {
+          return eventDate >= startOfToday && eventDate < oneWeekFromNow
+        }
+
+        if (match === "next-week") {
+          return eventDate >= oneWeekFromNow && eventDate < twoWeeksFromNow
+        }
+
+        return false
+      })
+      
+    }
+
+    this.events = filteredEvents
+    console.log('events = ', this.events)
+    this.render()
+  }
+
 
   render(){
 
@@ -53,51 +117,57 @@ class ExploreView {
         <div class="explore__content">
           
           <div class="explore__search">
-            
-            <sl-input placeholder="Try searching for something new..." pill>
-              <sl-icon slot="prefix" name="search"></sl-icon>
+            <div class="sl-select-container">
+            <sl-select class="quick-filters-input" id="sport-select" placeholder="Pick a sport..." pill @sl-change=${e => this.handleFilterBtn("sport", e.target.value)}>
+                <sl-option value="afl">AFL</sl-option>
+                <sl-option value="badminton">Badminton</sl-option>
+                <sl-option value="cricket">Cricket</sl-option>
+                <sl-option value="golf">Golf</sl-option>
+                <sl-option value="netball">Netball</sl-option>
+                <sl-option value="rugby">Rugby</sl-option>
+                <sl-option value="running">Running</sl-option>
+                <sl-option value="soccer">Soccer</sl-option>
+                <sl-option value="hockey">Hockey</sl-option>
+                <sl-option value="tennis">Tennis</sl-option>
             </sl-input>
+            </div>
 
             <div class="explore__buttons">
               <div class="explore__quick-filters">
-
-                <sl-dropdown>
-                  <sl-button slot="trigger" caret pill>Difficulty</sl-button>
-                  <sl-menu>
-                    <sl-menu-item value="easy" type="checkbox" class="prevent-close">Easy</sl-menu-item>
-                    <sl-menu-item value="medium" type="checkbox" class="prevent-close">Medium</sl-menu-item>
-                    <sl-menu-item value="hard" type="checkbox" class="prevent-close">Hard</sl-menu-item>
-                  </sl-menu>
+  
+              <div class="container">
+                <sl-select class="quick-filters-input" id="difficulty-select" placeholder="Difficulty" pill @sl-change=${e => this.handleFilterBtn("difficulty", e.target.value)}>
+                  <sl-option value="easy">Easy</sl-option>
+                  <sl-option value="medium">Medium</sl-option>
+                  <sl-option value="hard">Hard</sl-option>
                 </sl-dropdown>
-
-                <sl-dropdown>
-                  <sl-button slot="trigger" caret pill>Date</sl-button>
-                  <sl-menu>
-                    <sl-menu-item>Today</sl-menu-item>
-                    <sl-menu-item>Tomorrow</sl-menu-item>
-                    <sl-menu-item>This week</sl-menu-item>
-                    <sl-menu-item>Next week</sl-menu-item>
-                  </sl-menu>
-                </sl-dropdown>
-
-                <sl-dropdown>
-                  <sl-button slot="trigger" caret pill>Group size</sl-button>
-                  <sl-menu>
-                    <sl-menu-item>2-5</sl-menu-item>
-                    <sl-menu-item>6-10</sl-menu-item>
-                    <sl-menu-item>11-20</sl-menu-item>
-                    <sl-menu-item>21+</sl-menu-item>
-                  </sl-menu>
-                </sl-dropdown>
-
               </div>
 
-              <button class="explore__button button button--solid filters-button">See all filters</button>
+              <div class="container">
+                <sl-select class="quick-filters-input" id="groupsize-select" placeholder="Group size" pill @sl-change=${e => this.handleFilterBtn("groupsize", e.target.value)}>
+                  <sl-option value="2-5">2-5</sl-option>
+                  <sl-option value="6-10">6-10</sl-option>
+                  <sl-option value="11-20">11-20</sl-option>
+                  <sl-option value="21+">21+</sl-option>
+                </sl-dropdown>
+              </div>
+
+             <div class="container">
+              <sl-select class="quick-filters-input" id="date-select" placeholder="Date" pill @sl-change=${e => this.handleFilterBtn("date", e.target.value)}>
+                <sl-option value="this-week">This week</sl-option>
+                <sl-option value="next-week">Next week</sl-option>
+              </sl-select>
+             </div>
+
+            </div>
+
+              <button style="display: none;" class="explore__button button button--solid filters-button">See all filters</button>
+              <button class="explore__button button button--outline clear-filters" @click=${()=> this.clearFilters()}>Clear filters</button>
             </div>
           </div>
 
           <div class="explore__events">
-            ${this.events !== null ?
+            ${this.events.length !== 0 ?
               this.events.map(event => html`
                 <ct-event
                 name="${event.name}"
@@ -110,7 +180,13 @@ class ExploreView {
                 orientation="horizontal"
                 ></ct-event>`)
                 :
-                html`<p>No events found!</p>`
+                html`
+                <ct-emptystate 
+                imagesize="small"
+                title="Hmmm... you've stumped us!"
+                message="We can't find any events that meet your requirements... Why not posting your own Communiteam event?"
+                buttonlabel="Post new event"
+                buttonurl="/myEvents/newEvent"></ct-emptystate>`
 
             }
           </div>
@@ -147,16 +223,16 @@ class ExploreView {
                 <div class="modal__content-frame">
                   <sl-select label="Sport" placeholder="Search for a sport..." multiple clearable pill>
                     <sl-icon slot="prefix" name="search"></sl-icon>
-                    <sl-option value="option-1">AFL</sl-option>
-                    <sl-option value="option-2">Cricket</sl-option>
-                    <sl-option value="option-3">Golf</sl-option>
-                    <sl-option value="option-4">Netball</sl-option>
-                    <sl-option value="option-5">Rugby</sl-option>
-                    <sl-option value="option-6">Running</sl-option>
-                    <sl-option value="option-7">Soccer</sl-option>
-                    <sl-option value="option-8">Hockey</sl-option>
-                    <sl-option value="option-9">Tennis</sl-option>
-                    <sl-option value="option-10">Badminton</sl-option>
+                      <sl-option value="afl">AFL</sl-option>
+                      <sl-option value="badminton">Badminton</sl-option>
+                      <sl-option value="cricket">Cricket</sl-option>
+                      <sl-option value="golf">Golf</sl-option>
+                      <sl-option value="netball">Netball</sl-option>
+                      <sl-option value="rugby">Rugby</sl-option>
+                      <sl-option value="running">Running</sl-option>
+                      <sl-option value="soccer">Soccer</sl-option>
+                      <sl-option value="hockey">Hockey</sl-option>
+                      <sl-option value="tennis">Tennis</sl-option>
                   </sl-select>
                 </div>
                 <div class="modal__content-frame">

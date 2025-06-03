@@ -31,28 +31,6 @@ class newEventView {
       Toast.show(err, 'error')
       submitBtn.removeAttribute('loading')
     }
-
-
-    // try{
-    //   await EventAPI.newEvent(formData)
-    //   Toast.show('Event added!')
-    //   submitBtn.removeAttribute('loading')
-    //   // reset form
-    //   // reset text and text area fields
-    //   const textInputs = document.querySelectorAll('sl-input, sl-textarea')
-    //   if(textInputs) textInputs.forEach(textInput => textInput.value = null)
-      
-    //   const radioInputs = document.querySelectorAll('sl-radio-group')
-    //   if (radioInputs) radioInputs.forEach(radioInput => radioInput.value = null)
-    
-    //   const fileInput = document.querySelector('input[type=file]')
-    //   if(fileInput) fileInput.value=null
-    
-    
-    //   }catch(err){
-    //   Toast.show(err, 'error')
-    //   submitBtn.removeAttribute('loading')
-    // }
   }
 
   render(){
@@ -92,16 +70,16 @@ class newEventView {
               <div class="input-group">
                 <label for="sport">Sport</label>
                 <sl-select name="sport" type="text" required clearable pill>
-                <sl-option value="AFL">AFL</sl-option>
-                <sl-option value="Badminton">Badminton</sl-option>
-                <sl-option value="Cricket">Cricket</sl-option>
-                <sl-option value="Golf">Golf</sl-option>
-                <sl-option value="Netball">Netball</sl-option>
-                <sl-option value="Rugby">Rugby</sl-option>
-                <sl-option value="Running">Running</sl-option>
-                <sl-option value="Soccer">Soccer</sl-option>
-                <sl-option value="Hockey">Hockey</sl-option>
-                <sl-option value="Tennis">Tennis</sl-option>
+                <sl-option value="afl">AFL</sl-option>
+                <sl-option value="badminton">Badminton</sl-option>
+                <sl-option value="cricket">Cricket</sl-option>
+                <sl-option value="golf">Golf</sl-option>
+                <sl-option value="netball">Netball</sl-option>
+                <sl-option value="rugby">Rugby</sl-option>
+                <sl-option value="running">Running</sl-option>
+                <sl-option value="soccer">Soccer</sl-option>
+                <sl-option value="hockey">Hockey</sl-option>
+                <sl-option value="tennis">Tennis</sl-option>
                 </sl-select>
               </div>
             </div> 
@@ -140,7 +118,7 @@ class newEventView {
               <sl-radio-group name="groupsize" required pill>
                 <sl-radio-button value="2-5" pill>2-5</sl-radio-button>
                 <sl-radio-button value="6-10" pill>6-10</sl-radio-button>
-                <sl-radio-button value="11-24" pill>11-20</sl-radio-button>
+                <sl-radio-button value="11-20" pill>11-20</sl-radio-button>
                 <sl-radio-button value="21+" pill>21+</sl-radio-button>
               </sl-input>
             </div>

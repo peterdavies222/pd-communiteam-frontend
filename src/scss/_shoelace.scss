@@ -30,8 +30,13 @@ sl-radio-button::part(label) {
   font-family: 'sofia-regular';
 }
 
+sl-radio-button::part(button) {
+  border: solid var(--ct-midgrey) 1px;
+}
+
 sl-dropdown sl-button::part(base) {
   background-color: var(--ct-lightyellow);
+  border: solid var(--ct-midgrey) 1px;
 }
 
 

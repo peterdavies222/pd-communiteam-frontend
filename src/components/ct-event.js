@@ -128,6 +128,8 @@ customElements.define('ct-event', class Communiteam extends LitElement {
         padding: 5px 15px;
         border-radius: 100px;
         font-family: 'sofia-medium';
+        border: none;
+        cursor: pointer;
       }
       .event__button.dashed {
         background-color: transparent;

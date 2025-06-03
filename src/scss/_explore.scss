@@ -1,6 +1,6 @@
 .explore {
 
-    height: 60vh;
+    height: 80vh;
 
     @media screen and (max-width: 1024px) {
       height: auto;
@@ -14,18 +14,56 @@
       gap: 30px;
   
       .explore__search {
-        sl-input {
-          margin-bottom: 15px;
+        
+        .sl-select-container {
+          margin-bottom: 10px;
         }
   
         .explore__buttons {
           display: flex;
           justify-content: space-between;
+          gap: 20px;
+
+          @media screen and (max-width: 768px) {
+              flex-direction: column;
+              gap: 10px;
+            }
   
           .explore__quick-filters {
             display: flex;
-            gap: 15px;
+            gap: 5px;
             position: relative;
+
+            @media screen and (max-width: 500px) {
+              flex-direction: column;
+              gap: 10px;
+            }
+
+            .container {
+              flex-shrink: 1;
+              width: fit-content;
+
+              @media screen and (max-width: 500px) {
+                width: 100%;
+              }
+
+              sl-select {
+                flex-shrink: 1;
+
+                @media screen and (max-width: 500px) {
+                  width: 100%;
+                }
+              }
+            }
+          }
+
+          .clear-filters {
+            flex-shrink: 0;
+            align-self: stretch;
+
+            @media screen and (max-width: 768px) {
+              align-self: flex-end;
+            }
           }
         }
       }
