@@ -82,6 +82,8 @@ class DashboardView {
       
 
       <main class="dashboard main-content">
+
+      <!--
         
         <div class="content-frame">
             <div class="title">
@@ -102,6 +104,7 @@ class DashboardView {
             </ct-message>
             </div>
         </div>
+        -->
 
         <div class="content-frame">
           <div class="title">

@@ -36,6 +36,9 @@ customElements.define('ct-event', class Communiteam extends LitElement {
       },
       type: {
         type: String
+      },
+      id: {
+        type: String
       }
     }
   }
@@ -164,7 +167,9 @@ customElements.define('ct-event', class Communiteam extends LitElement {
         <p class="event__details">${this.date ? new Date(this.date).toDateString() : 'DATE HERE'}, ${this.location ? this.location : 'LOCATION HERE'}</p>
         <h3 class="event__name">${this.name ? this.name : 'NAME HERE'}</h3>
         <p class="event__description">${this.description ? this.description : 'DESCRIPTION HERE'}</p>
-        ${this.section == 'drafts' ? html`<a href="${this.url.bind(this)}" class="event__button dashed" @click="${this.menuClick}">Edit draft</a>` : html`<a href="${this.url}" @click="${()=>this.menuClick.bind(this)}" class="event__button">View details</a>`}
+        ${this.section == 'drafts' ? 
+          html`<a href="${this.url.bind(this)}" class="event__button dashed" @click="${this.menuClick}">Edit draft</a>` :
+          html`<button @click=${()=>gotoRoute(`/event?id=${this.id}`)} class="event__button">View details</button>`}
       </div>
       
     </div>    

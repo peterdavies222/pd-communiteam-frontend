@@ -86,10 +86,7 @@ class PostedView {
                 `
                 :
                 html`
-                <div class="content-frame">
-                  <div class="title">
-                    <h2>This week</h2>
-                  </div>
+
                   <div class="events-grid">
                     ${this.postedEvents.map(event => html`
                       <ct-event
@@ -98,10 +95,11 @@ class PostedView {
                       name="${event.name}"
                       description="${event.description}"
                       location="${event.location}"
-                      url="/event?id=${event._id}"></ct-event>
+                      url="/event?id=${event._id}"
+                      id="${event._id}"></ct-event>
                       `)}
                   </div>
-                  </div>
+
                     `
               }
             `

@@ -422,7 +422,7 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
             </sl-menu>
           </sl-dropdown>
         </li>
-        <li><a href="/messages" class="nav__link messages" @click="${this.menuClick}">${messagesIcon}Messages ${this.messagecount > 0 ? html`<span class="nav__messagecount">${this.messagecount}</span>` : ""}</a></li>
+        <!--<li><a href="/messages" class="nav__link messages" @click="${this.menuClick}">${messagesIcon}Messages ${this.messagecount > 0 ? html`<span class="nav__messagecount">${this.messagecount}</span>` : ""}</a></li>-->
         <li>
 
           <sl-dropdown>
@@ -474,7 +474,7 @@ customElements.define('ct-nav', class Communiteam extends LitElement {
             </ul>
           </li>
             
-          <li><a href="/messages" @click="${this.menuClick}" class="nav__link messages">${messagesIcon}Messages</a></li>
+          <!--<li><a href="/messages" @click="${this.menuClick}" class="nav__link messages">${messagesIcon}Messages</a></li>-->
           <li><a href="/profile" @click="${this.menuClick}" class="nav__link profile">${profileIcon}Profile</a></li>
           <li><a href="/" class="nav__link" @click="${() => Auth.signOut()}">${logoutIcon}Sign Out</a></li>
             

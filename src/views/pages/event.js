@@ -191,7 +191,7 @@ class EventView {
             </div>
             <div class="event-title--left--lower">
               <div class="event-title__host">
-                <sl-avatar image=${hostUser.avatar ? hostUser.avatar : ''}></sl-avatar>
+                <sl-avatar image=${hostUser.avatar ? `${App.apiBase}/images/${Auth.currentUser.avatar}` : ''}></sl-avatar>
                 <p>Organised by <span class="highlighted-text">${hostUser.firstName} ${hostUser.lastName}</span></p>
               </div>
               <div class="event-title__attending">
@@ -253,7 +253,7 @@ class EventView {
               <li>${timeIcon}${(new Date(event.date)).toDateString()}, at ${event.time}</li>
               <li>${sportIcon}${event.sport}</li>
               <li>${locationIcon}${event.location}</li>
-              <li>${difficultyIcon}${event.difficulty} difficulty</li>
+              <li>${difficultyIcon}${Utils.toTitleCase(event.difficulty)} difficulty</li>
               <li>${peopleCountIcon}${event.groupSize} people</li>
             </ul>
           </div>
