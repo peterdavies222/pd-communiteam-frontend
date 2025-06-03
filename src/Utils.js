@@ -139,7 +139,14 @@ class Utils {
       return;
     }
 
+    buttonContainer.style.display = "flex"
+    console.log('scrollButtons function being called for ', baseId)
+
+
+
     function buttonVisibility() {
+      console.log(baseId, ' content scroll width = ', content.scrollWidth)
+      console.log(baseId,' content client width = ', content.clientWidth)
       if(content && content.scrollWidth > content.clientWidth) {
         buttonContainer.style.display = 'flex';
       };
@@ -148,9 +155,9 @@ class Utils {
       };
     }
     
-    setTimeout(()=> {
-      buttonVisibility()
-    }, 0)
+    requestAnimationFrame(() => {
+      buttonVisibility();
+    });
 
 
     window.addEventListener('resize', ()=> {

@@ -6,7 +6,7 @@
     &.main-content {
         padding-block: 30px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         height: 100vh;
     }
 
@@ -29,9 +29,9 @@
             align-items: center;
             width: 100%;
             justify-content: space-between;
-            height: calc(100vh - 200px);
-            // height: fit-content;
-            position: relative;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
 
             button:not(.onboarding-finish-button) {
                 align-self: center;

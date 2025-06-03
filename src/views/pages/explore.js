@@ -42,7 +42,7 @@ class ExploreView {
         ></ct-nav>
 
         <ct-heroimage
-          image="images/explore-hero.jpeg"
+          image="images/explore-hero.jpg"
           title="Find your next sport"
         ></ct-heroimage>
     </header>

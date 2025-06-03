@@ -17,7 +17,7 @@ class App {
     console.log("App.init")
     
     // Toast init
-    Toast.init()   
+    Toast.init()  
     
     // Authentication check    
     Auth.check(() => {

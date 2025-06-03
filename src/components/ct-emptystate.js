@@ -32,6 +32,9 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
       },
       action: {
         type: String
+      },
+      imagesize: {
+        type: String
       }
     }
   }
@@ -82,22 +85,23 @@ customElements.define('ct-emptystate', class Communiteam extends LitElement {
         text-align: center;
         display: flex;
         flex-direction: column;
-        gap: 60px;
+        gap: 30px;
       }
       .empty-state__image {
         align-self: center;
         margin: 0;
         width: 300px;
         max-width: 100%;
+        ${this.imagesize === "small" ? 'width: 200px;' : ''}
       }
       .empty-state__text {
         display: flex;
-        gap: 30px;
+        gap: 10px;
         flex-direction: column;
       }
       .empty-state__title {
         font-family: 'veneer-regular';
-        font-size: calc(36rem / 16);
+        font-size: calc(24rem / 16);
         color: var(--ct-black);
         margin: 0;
         font-weight: 100;

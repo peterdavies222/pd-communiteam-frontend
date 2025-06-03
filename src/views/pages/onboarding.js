@@ -29,7 +29,7 @@ class OnboardingView {
     const template = html`
       <main class="onboarding">
 
-        <img src="../images/onboarding-background.jpeg" alt="People running." class="background-image">
+        <img src="../images/onboarding-background.jpg" alt="People running." class="background-image">
 
         <div class="main-content onboarding">
 
@@ -42,15 +42,15 @@ class OnboardingView {
             <button class="onboarding__button left scroll-button"><i class="fa-solid fa-chevron-left"></i></button>
             <div class="onboarding__carousel-content">
               <ct-onboarding-frame
-              image="../images/dashboard.png" title="Dashboard" message="Easily find a summary of new messages, upcoming events, and suggestions."></ct-onboarding-frame>
+              image="../images/onboarding-1.svg" title="Dashboard" message="Easily find a summary of new messages, upcoming events, and suggestions."></ct-onboarding-frame>
               <ct-onboarding-frame
-              image="../images/explore.png" title="Explore" message="Find events by location, activity type, date, skill level, and more."></ct-onboarding-frame>
+              image="../images/onboarding-2.svg" title="Explore" message="Find events by location, activity type, date, skill level, and more."></ct-onboarding-frame>
               <ct-onboarding-frame
-              image="../images/events.png" title="My Events" message="Post new events*, and see your saved and upcoming events."></ct-onboarding-frame>
+              image="../images/onboarding-3.svg" title="My Events" message="Post new events*, and see your saved and upcoming events."></ct-onboarding-frame>
               <ct-onboarding-frame
-              image="images/messages.png" title="Messages" message="Get in touch with your fellow athletes."></ct-onboarding-frame>
+              image="images/onboarding-4.svg" title="Messages" message="Get in touch with your fellow athletes."></ct-onboarding-frame>
               <ct-onboarding-frame
-              image="images/profile.png" title="Profile" message="Easily review and update your information."></ct-onboarding-frame>
+              image="images/onboarding-5.svg" title="Profile" message="Easily review and update your information."></ct-onboarding-frame>
             </div>
             <button class="onboarding__button right scroll-button"><i class="fa-solid fa-chevron-right"></i></button>
             <button class="button button--solid onboarding-finish-button" @click=${() => gotoRoute('/dashboard')}><p>Get sporting!</p><i class="fa-solid fa-chevron-right"></i></button>

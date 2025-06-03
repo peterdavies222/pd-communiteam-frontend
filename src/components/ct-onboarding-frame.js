@@ -42,17 +42,17 @@ customElements.define('ct-onboarding-frame', class Communiteam extends LitElemen
       .wrap {
         width: 100%;
         height: fit-content;
-        overflow-y: auto;
+        
+      }
+      .image-container {
+        max-width: 350px;
+        margin: auto;
+        text-align: center;
       }
       img {
-        display: block;
-        width: calc(100% - 120px);
-        /* height: 424px; */
-        aspect-ratio: 16/9;
-        object-fit: cover;
-        object-position: 0% 0%;
-        margin: auto;
-        border-radius: 15px 15px 0 0;
+        height: 100%;
+        max-height: 50vh;
+        margin-block: auto;
       }
       .line {
         width: 100%;
@@ -70,10 +70,14 @@ customElements.define('ct-onboarding-frame', class Communiteam extends LitElemen
       p {
         margin: 0;
       }
+      
     </style>
   
     <div class="wrap">
-        <img src="${this.image ? this.image : '../images/dashboard.png'}" alt="${this.title ? this.title : 'Onboarding image.'}">
+        <div class="image-container">
+          <img src="${this.image ? this.image : '../images/dashboard.png'}" alt="${this.title ? this.title : 'Onboarding image.'}">
+        </div>
+          
         <div class="line"></div>
         <div class="info">
           <h2>${this.title ? this.title : 'title'}</h2>

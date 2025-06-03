@@ -15,10 +15,10 @@ class DashboardView {
     this.savedEventIds = Auth.currentUser.savedEvents
     await this.upcoming()
     await this.saved()
-    this.render()    
+    this.render()
+    if(this.savedEvents.length !== 0) Utils.scrollButtons('saved')
+    if(this.upcomingEvents.length !== 0) Utils.scrollButtons('upcoming')
     Utils.pageIntroAnim()
-    Utils.scrollButtons('suggested')
-    Utils.scrollButtons('upcoming')
   }
 
   menuClick(e){
@@ -106,12 +106,23 @@ class DashboardView {
         <div class="content-frame">
           <div class="title">
             <h2>Your upcoming events</h2>
-            <div class="title__buttons" id="upcoming__buttons">
+            <div class="title__buttons" id="upcoming__buttons" style="display: none;">
               <button class="scroll-button" id="upcoming__left"><i class="fa-solid fa-chevron-left"></i></button>
               <button class="scroll-button" id="upcoming__right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="carousel" id="upcoming__carousel">
+          ${this.upcomingEvents.length === 0 ?
+            html`
+            <ct-emptystate
+            title="No upcoming events!"
+            message="Why not search for some events now?"
+            buttonlabel="Explore events"
+            buttonurl="/explore"
+            imagesize="small"
+            ></ct-emptystate>`
+            :
+            html`
+            <div class="carousel" id="upcoming__carousel">
             ${this.upcomingEvents.map(event => html`
                 <ct-event
                   name="${event.name}"
@@ -122,18 +133,32 @@ class DashboardView {
                   url="/event?id=${event._id}"
                 ></ct-event>
               `)}
-          </div>
+          </div>`
+          }
+          
         </div>
 
         <div class="content-frame">
           <div class="title">
             <h2>Your saved events</h2>
-            <div class="title__buttons" id="suggested__buttons">
-              <button class="scroll-button" id="suggested__left"><i class="fa-solid fa-chevron-left"></i></button>
-              <button class="scroll-button" id="suggested__right"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="title__buttons" id="saved__buttons">
+              <button class="scroll-button" id="saved__left"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="scroll-button" id="saved__right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
-          <div class="carousel" id="suggested__carousel">
+
+          ${this.savedEvents.length === 0 ?
+            html`
+            <ct-emptystate
+              title="No saved events!"
+              message="It's never to late to find your Communiteam!"
+              buttonlabel="Explore events"
+              buttonurl="/explore"
+              imagesize="small"
+            ></ct-emptystate>`
+            :
+            html`
+            <div class="carousel" id="saved__carousel">
             ${this.savedEvents.map(event => html`
                 <ct-event
                   name="${event.name}"
@@ -144,7 +169,8 @@ class DashboardView {
                   url="/event?id=${event._id}"
                 ></ct-event>
               `)}
-          </div>
+          </div>`
+          }
         </div>
        
         
