@@ -112,6 +112,7 @@ class Router {
 	}
 
 	gotoRoute(pathname){
+		window.scrollTo({top: 0})
 		window.history.pushState({}, pathname, window.location.origin + pathname);
 		this.route(pathname)
 	}	
