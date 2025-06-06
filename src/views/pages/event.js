@@ -191,14 +191,14 @@ class EventView {
             </div>
             <div class="event-title--left--lower">
               <div class="event-title__host">
-                <sl-avatar image=${hostUser.avatar ? `${App.apiBase}/images/${Auth.currentUser.avatar}` : ''}></sl-avatar>
+                <sl-avatar image=${hostUser.avatar ? `${App.apiBase}/images/${hostUser.avatar}` : ''}></sl-avatar>
                 <p>Organised by <span class="highlighted-text">${hostUser.firstName} ${hostUser.lastName}</span></p>
               </div>
               <div class="event-title__attending">
                 <div class="avatar-group">
                   ${attendingUsers.map(user => html`
                     <sl-avatar
-                      image="${App.apiBase}/images/${user.avatar}"
+                      image=${user.avatar ? `${App.apiBase}/images/${user.avatar}` : ''}
                     ></sl-avatar>`)}
                 </div>
                 <p><span class="highlighted-text">${attendingUsers.length} ${attendingUsers.length == 1 ? 'person' : 'people'}</span> as well as host attending next session</p>
@@ -251,7 +251,7 @@ class EventView {
             <h2>Details</h2>
             <ul class="details__list">
               <li>${timeIcon}${(new Date(event.date)).toDateString()}, at ${event.time}</li>
-              <li>${sportIcon}${event.sport}</li>
+              <li>${sportIcon}${Utils.toTitleCase(event.sport)}</li>
               <li>${locationIcon}${event.location}</li>
               <li>${difficultyIcon}${Utils.toTitleCase(event.difficulty)} difficulty</li>
               <li>${peopleCountIcon}${event.groupSize} people</li>

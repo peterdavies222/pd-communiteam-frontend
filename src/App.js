@@ -7,8 +7,8 @@ class App {
   constructor(){
     this.name = "Communiteam"
     this.version = "1.0.0"
-    //this.apiBase = 'http://localhost:3000' // for local editing, comment out this line when pushing to github
-    this.apiBase = 'https://pd-communiteam-backend.onrender.com' // for live site, make sure this line is active before publishing to github
+    this.apiBase = 'http://localhost:3000' // for local editing, comment out this line when pushing to github
+    //this.apiBase = 'https://pd-communiteam-backend.onrender.com' // for live site, make sure this line is active before publishing to github
     this.rootEl = document.getElementById("root")
     this.version = "1.0.0"
   }
