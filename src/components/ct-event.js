@@ -66,19 +66,21 @@ customElements.define('ct-event', class Communiteam extends LitElement {
         box-sizing: border-box;
       }
       .event {
-        width: 300px;
+        width: 100%;
         max-width: 100%;
         ${this.type == 'grid' ? 'width: 100%;' : ''}
         height: fit-content;
         margin-bottom: 5px;
+        background-color: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        border: solid #E7DFD4 2px;
       }
+
       .event__image {
         margin: 0;
         width: 100%;
         aspect-ratio: 300/185;
-        margin-bottom: 15px;
-        border-radius: 15px;
-        border: solid var(--ct-midgrey) 1px;
         overflow: hidden;
         background-color: var(--ct-yellow);
       }
@@ -88,46 +90,58 @@ customElements.define('ct-event', class Communiteam extends LitElement {
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
 
+      .event__text {
+        padding: 15px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
       }
       .event__details {
-        margin: 0;
+        margin: 0 0 15px 0;
         color: var(--ct-red);
-        font-size: 0.75rem;
+        font-size: calc(14rem / 16);
+        color: var(--ct-orange);
         font-family: 'sofia-bold';
       }
       .event__name {
         margin: 0;
         color: var(--ct-black);
-        font-size: 1.25rem;
-        font-family: 'sofia-bold';
-        margin-bottom: 15px;
+        font-size: calc(24rem/16);
+        font-family: 'sofia-pro-soft';
+        font-weight: 500;
+        margin-bottom: 10px;
+        /* overflow: hidden; */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+                line-clamp: 2; 
+        -webkit-box-orient: vertical;
+        line-height: 1;
+      }
+      .event__description {
+        margin: 0;
+        color: var(--ct-darkgrey);
+        font-size: 1rem;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;
                 line-clamp: 3; 
         -webkit-box-orient: vertical;
-      }
-      .event__description {
-        margin: 0;
-        color: var(--ct-darkgrey);
-        font-size: calc(14rem / 16);
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 5;
-                line-clamp: 5; 
-        -webkit-box-orient: vertical;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
       }
       .event__button {
         margin: 0;
         color: var(--ct-darkgrey);
-        font-size: calc(14rem / 16);
+        font-size: 1rem;
         text-decoration: none;
         background-color: var(--ct-green);
         padding: 5px 15px;
         border-radius: 100px;
-        font-family: 'sofia-medium';
+        font-family: 'sofia-pro-soft', sans-serif;
+        color: var(--ct-darkgrey);
+        font-weight: 700;
         border: none;
         cursor: pointer;
       }
@@ -147,9 +161,9 @@ customElements.define('ct-event', class Communiteam extends LitElement {
 
       .event--horizontal {
         display: flex;
-        gap: 15px;
+        gap: 0;
         width: 100%;
-        height: fit-content;
+        min-height: 200px;
       }
       .event--horizontal .event__image {
         width: 50%;
@@ -157,6 +171,10 @@ customElements.define('ct-event', class Communiteam extends LitElement {
       }
       .event--horizontal .event__text {
         width: 50%;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
     </style>
@@ -166,9 +184,11 @@ customElements.define('ct-event', class Communiteam extends LitElement {
         <img src="${App.apiBase}/images/${this.images?.[0].imageUrl}" alt="Image of ${this.name}.">
       </div>
       <div class="event__text">
-        <p class="event__details">${this.date ? new Date(this.date).toDateString() : 'DATE HERE'}, ${this.location ? this.location : 'LOCATION HERE'}</p>
-        <h3 class="event__name">${this.name ? this.name : 'NAME HERE'}</h3>
-        <p class="event__description">${this.description ? this.description : 'DESCRIPTION HERE'}</p>
+        <div>
+         <h3 class="event__name">${this.name ? this.name : 'NAME HERE'}</h3>
+          <p class="event__details">${this.date ? new Date(this.date).toDateString() : 'DATE HERE'}, ${this.location ? this.location : 'LOCATION HERE'}</p>
+          <p class="event__description">${this.description ? this.description : 'DESCRIPTION HERE'}</p>
+        </div>
         ${this.section == 'drafts' ? 
           html`<a href="${this.url.bind(this)}" class="event__button dashed" @click="${this.menuClick}">Edit draft</a>` :
           html`<button @click=${()=>gotoRoute(`/event?id=${this.id}`)} class="event__button">View details</button>`}

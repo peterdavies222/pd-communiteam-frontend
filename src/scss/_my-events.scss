@@ -1,18 +1,22 @@
 .events-grid {
     // display: grid;
     // grid-template-columns: repeat(4, 1fr);
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     column-gap: 30px;
     row-gap: 60px;
     ct-event {
-        flex-grow: 0;
-        width: 300px;
-        max-width: 100%;
+        width: 100%;
     }
 }
 
 .new-event {
+
+    form {
+        width: min(600px, 100%);
+        margin: 0 auto;
+    }
+
     .input-group {
         margin-bottom: 30px;
     }
@@ -39,6 +43,8 @@
             border-color: var(--ct-tintedgreen);
         }
     }
+
+
 
     .button-container {
         text-align: center;
